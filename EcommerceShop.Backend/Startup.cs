@@ -1,4 +1,5 @@
 using EcommerceShop.Backend.Data;
+using EcommerceShop.Backend.IdentityServer;
 using EcommerceShop.Backend.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,21 @@ namespace EcommerceShop.Backend
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+                options.EmitStaticAudienceClaim = true;
+            })
+            .AddInMemoryIdentityResources(IdentityServerConfig.IdentityResources)
+            .AddInMemoryApiScopes(IdentityServerConfig.ApiScopes)
+            .AddInMemoryClients(IdentityServerConfig.Clients)
+            .AddAspNetIdentity<User>()
+            .AddDeveloperSigningCredential();
+
             services.AddControllersWithViews();
         }
 
@@ -56,8 +72,7 @@ namespace EcommerceShop.Backend
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthentication();
+            app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
