@@ -1,4 +1,4 @@
-﻿using EcommerceShop.Backend.Models;
+﻿using EcommerceShop.Backend.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
