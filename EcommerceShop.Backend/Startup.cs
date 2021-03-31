@@ -51,7 +51,20 @@ namespace EcommerceShop.Backend
             .AddInMemoryClients(IdentityServerConfig.Clients)
             .AddAspNetIdentity<User>()
             .AddDeveloperSigningCredential();
+            services.AddAuthentication()
+                .AddLocalApi("Bearer", option =>
+                {
+                    option.ExpectedScope = "rookieshop.api";
+                });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Bearer");
+                    policy.RequireAuthenticatedUser();
+                });
+            });
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
