@@ -13,6 +13,7 @@ namespace EcommerceShop.Backend.Controllers
 {
         [Route("api/[controller]")]
         [ApiController]
+        [Authorize("Bearer")]
         public class BrandsController : ControllerBase
         {
             private readonly ApplicationDbContext _context;
