@@ -13,6 +13,6 @@ namespace EcommerceShop.Backend.Data
             : base(options)
         {
         }
-        
+        public DbSet<Brand> Brands { get; set; }
     }
 }
