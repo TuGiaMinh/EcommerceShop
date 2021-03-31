@@ -44,9 +44,9 @@ namespace EcommerceShop.Backend.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44301/signin-oidc" },
+                    RedirectUris = { "https://localhost:44329/signin-oidc" },
 
-                    PostLogoutRedirectUris = { "https://localhost:44301/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44329/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {

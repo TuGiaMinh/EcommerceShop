@@ -13,5 +13,6 @@ namespace EcommerceShop.Backend.Data
             : base(options)
         {
         }
+        
     }
 }
