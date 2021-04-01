@@ -36,6 +36,7 @@ namespace EcommerceShop.Backend
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer(options =>
@@ -50,6 +51,7 @@ namespace EcommerceShop.Backend
             .AddInMemoryApiScopes(IdentityServerConfig.ApiScopes)
             .AddInMemoryClients(IdentityServerConfig.Clients)
             .AddAspNetIdentity<User>()
+            .AddProfileService<CustomProfileService>()
             .AddDeveloperSigningCredential();
             services.AddAuthentication()
                 .AddLocalApi("Bearer", option =>
