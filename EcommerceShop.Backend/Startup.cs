@@ -1,3 +1,4 @@
+using EcommerceShop.Application.Brand;
 using EcommerceShop.Backend.Data;
 using EcommerceShop.Backend.IdentityServer;
 using EcommerceShop.Backend.Models;
@@ -38,7 +39,7 @@ namespace EcommerceShop.Backend
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddTransient<IBrandService, BrandService>();
             services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -67,6 +68,7 @@ namespace EcommerceShop.Backend
                     policy.RequireAuthenticatedUser();
                 });
             });
+            
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {

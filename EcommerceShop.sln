@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceShop.Backend", "Ec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceShop.CustomerSite", "EcommerceShop.CustomerSite\EcommerceShop.CustomerSite.csproj", "{CB84811C-BB8F-4893-8C5A-43BC44E94D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceShop.Shared", "EcommerceShop.Shared\EcommerceShop.Shared.csproj", "{7C921A71-CACC-44B7-AE30-3209641CF261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceShop.Shared", "EcommerceShop.Shared\EcommerceShop.Shared.csproj", "{7C921A71-CACC-44B7-AE30-3209641CF261}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

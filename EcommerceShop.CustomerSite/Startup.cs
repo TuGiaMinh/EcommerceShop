@@ -52,7 +52,7 @@ namespace EcommerceShop.CustomerSite
                        RoleClaimType = "role"
                    };
                });
-
+            services.AddHttpClient();
             services.AddControllersWithViews();
         }
 
