@@ -1,6 +1,6 @@
 ﻿using System;
-using EcommerceShop.Backend.Data;
-using EcommerceShop.Backend.Models;
+using EcommerceShop.Application.Data;
+using EcommerceShop.Application.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

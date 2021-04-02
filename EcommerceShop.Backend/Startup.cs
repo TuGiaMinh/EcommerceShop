@@ -1,7 +1,7 @@
 using EcommerceShop.Application.Brand;
-using EcommerceShop.Backend.Data;
+using EcommerceShop.Application.Data;
 using EcommerceShop.Backend.IdentityServer;
-using EcommerceShop.Backend.Models;
+using EcommerceShop.Application.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

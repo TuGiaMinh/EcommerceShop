@@ -1,5 +1,5 @@
-﻿using EcommerceShop.Backend.Data;
-using EcommerceShop.Backend.Models;
+﻿using EcommerceShop.Application.Data;
+using EcommerceShop.Application.Models;
 using EcommerceShop.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceShop.Application.Brand
 {
-    class BrandService : IBrandService
+    public class BrandService : IBrandService
     {
         private readonly ApplicationDbContext _context;
        
@@ -60,7 +60,7 @@ namespace EcommerceShop.Application.Brand
         public async Task<BrandVm> PostBrand(BrandCreateRequest request)
         {
 
-            var brand = new EcommerceShop.Backend.Models.Brand
+            var brand = new EcommerceShop.Application.Models.Brand
             {
                 Name = request.Name
             };

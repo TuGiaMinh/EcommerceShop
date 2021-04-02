@@ -1,4 +1,4 @@
-﻿using EcommerceShop.Backend.Models;
+﻿using EcommerceShop.Application.Models;
 using IdentityModel;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;

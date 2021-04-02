@@ -1,6 +1,4 @@
-﻿using EcommerceShop.Backend.Data;
-using EcommerceShop.Backend.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using EcommerceShop.Shared;
 using System;

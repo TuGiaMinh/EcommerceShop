@@ -1,11 +1,10 @@
-﻿using EcommerceShop.Backend.Models;
+﻿using EcommerceShop.Application.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-namespace EcommerceShop.Backend.Data
+namespace EcommerceShop.Application.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
@@ -13,6 +12,7 @@ namespace EcommerceShop.Backend.Data
             : base(options)
         {
         }
-        public DbSet<Brand> Brands { get; set; }
+        public DbSet<EcommerceShop.Application.Models.Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

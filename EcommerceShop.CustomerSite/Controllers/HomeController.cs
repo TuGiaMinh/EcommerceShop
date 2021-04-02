@@ -15,13 +15,12 @@ namespace EcommerceShop.CustomerSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHttpClientFactory _httpClientFactory;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
