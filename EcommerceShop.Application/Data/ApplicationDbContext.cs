@@ -12,6 +12,17 @@ namespace EcommerceShop.Application.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+
         public DbSet<EcommerceShop.Application.Models.Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
     }

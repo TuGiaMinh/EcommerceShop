@@ -29,5 +29,7 @@ namespace EcommerceShop.Application.Models
         public bool Gender { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateofBrith { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

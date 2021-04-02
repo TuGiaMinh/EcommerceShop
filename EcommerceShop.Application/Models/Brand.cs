@@ -10,5 +10,6 @@ namespace EcommerceShop.Application.Models
         public int BrandId { get; set; }
 
         public string Name { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

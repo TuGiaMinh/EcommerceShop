@@ -46,7 +46,7 @@ namespace EcommerceShop.Backend.IdentityServer
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString(CultureInfo.InvariantCulture)),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
-                    new Claim(JwtClaimTypes.Name, user.Email),
+                    new Claim(JwtClaimTypes.Name, user.FullName),
                     new Claim(JwtClaimTypes.Email, user.Email),
                 };
 
