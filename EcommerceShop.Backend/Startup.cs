@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EcommerceShop.Application.Service.Category;
 using EcommerceShop.Application.Service.Product;
 using EcommerceShop.Application.Service.Storage;
 
@@ -43,6 +44,7 @@ namespace EcommerceShop.Backend
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IProductService,ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddIdentityServer(options =>
             {
