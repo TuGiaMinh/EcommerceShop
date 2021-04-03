@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EcommerceShop.Application.Brand;
 using Microsoft.Extensions.Logging;
+using EcommerceShop.Shared.Brand;
+using EcommerceShop.Application.Service.Product;
 
 namespace EcommerceShop.Backend.Controllers
 {
@@ -30,7 +32,7 @@ namespace EcommerceShop.Backend.Controllers
             return Ok(brands);
         }
         [HttpGet("{id}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<BrandVm>> GetBrand(int id)
         {
             var brand = await _brandService.GetBrandById(id);

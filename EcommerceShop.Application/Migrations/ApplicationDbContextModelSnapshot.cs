@@ -405,13 +405,11 @@ namespace EcommerceShop.Application.Migrations
 
             modelBuilder.Entity("EcommerceShop.Application.Models.Image", b =>
                 {
-                    b.HasOne("EcommerceShop.Application.Models.Product", "Product")
+                    b.HasOne("EcommerceShop.Application.Models.Product", null)
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EcommerceShop.Application.Models.Order", b =>
@@ -445,13 +443,13 @@ namespace EcommerceShop.Application.Migrations
             modelBuilder.Entity("EcommerceShop.Application.Models.Product", b =>
                 {
                     b.HasOne("EcommerceShop.Application.Models.Brand", "Brand")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcommerceShop.Application.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -527,16 +525,6 @@ namespace EcommerceShop.Application.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EcommerceShop.Application.Models.Brand", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("EcommerceShop.Application.Models.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EcommerceShop.Application.Models.Product", b =>

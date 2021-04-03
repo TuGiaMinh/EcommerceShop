@@ -24,4 +24,8 @@
     <ProjectReference Include="..\EcommerceShop.Shared\EcommerceShop.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\user-content\" />
+  </ItemGroup>
+
 </Project>

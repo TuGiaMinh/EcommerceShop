@@ -1,6 +1,7 @@
 ﻿using EcommerceShop.Application.Data;
 using EcommerceShop.Application.Models;
 using EcommerceShop.Shared;
+using EcommerceShop.Shared.Brand;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;

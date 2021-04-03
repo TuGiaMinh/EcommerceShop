@@ -13,6 +13,5 @@ namespace EcommerceShop.Application.Models
         public string Caption { get; set; }
         public bool IsDefault { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
     }
 }
