@@ -41,21 +41,21 @@ namespace EcommerceShop.Backend.Controllers
             return Ok(products);
         }
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductCreateRequest>>> PostProduct([FromForm]ProductCreateRequest request)
         {
             var product = await _productService.PostProduct(request);
             return Ok(product);
         }
         [HttpPut("ProductId")]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductUpdateRequest>>> PutProduct(int ProductId,[FromForm] ProductUpdateRequest request)
         {
             var product = await _productService.PutProduct(ProductId,request);
             return Ok(product);
         }
         [HttpDelete("ProductId")]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductUpdateRequest>>> DeleteProduct(int ProductId)
         {
             var product = await _productService.DeleteProduct(ProductId);

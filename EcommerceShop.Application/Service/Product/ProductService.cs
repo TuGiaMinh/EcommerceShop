@@ -1,6 +1,7 @@
 ﻿using EcommerceShop.Application.Data;
 using EcommerceShop.Application.Models;
 using EcommerceShop.Application.Service.Storage;
+using EcommerceShop.Shared.Image;
 using EcommerceShop.Shared.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -40,21 +41,90 @@ namespace EcommerceShop.Application.Service.Product
             _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
         }
-        public async Task<IEnumerable<Models.Product>> GetProductByCategoryId(int CategoryId)
+        public async Task<IEnumerable<ProductVm>> GetProductByCategoryId(int CategoryId)
         {
-            return await _context.Products.Include(p => p.Images).Include(p => p.Category).Include(p => p.Brand).Where(x => x.CategoryId == CategoryId).ToListAsync();
+            var products = await _context.Products.Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).Where(x => x.BrandId == CategoryId).ToListAsync();
+
+            foreach (ProductVm product in products)
+            {
+                var listImageVm = await _context.Images.Select(x => new ImageVm
+                {
+                    ImageId = x.ImageId,
+                    ImageUrl = x.ImageUrl,
+                    Caption = x.Caption,
+                    IsDefault = x.IsDefault,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Images = listImageVm;
+            }
+            return products;
         }
-        public async Task<IEnumerable<EcommerceShop.Application.Models.Product>> GetProductByBrandId(int BrandId)
+        public async Task<IEnumerable<ProductVm>> GetProductByBrandId(int BrandId)
         {
-            return await _context.Products.Include(p => p.Images).Include(p => p.Category).Include(p => p.Brand).Where(x=>x.BrandId==BrandId).ToListAsync();
+            var products = await _context.Products.Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).Where(x=>x.BrandId==BrandId).ToListAsync();
+
+            foreach (ProductVm product in products)
+            {
+                var listImageVm = await _context.Images.Select(x => new ImageVm
+                {
+                    ImageId = x.ImageId,
+                    ImageUrl = x.ImageUrl,
+                    Caption = x.Caption,
+                    IsDefault = x.IsDefault,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Images = listImageVm;
+            }
+            return products;
         }
 
-        public async Task<IEnumerable<EcommerceShop.Application.Models.Product>> GetProducts()
+        public async Task<IEnumerable<ProductVm>> GetProducts()
         {
-            return await _context.Products.Include(p=>p.Images).Include(p => p.Category).Include(p=>p.Brand).ToListAsync();
+            var products = await _context.Products.Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).ToListAsync();
+            
+            foreach (ProductVm product in products)
+            {
+                var listImageVm = await _context.Images.Select(x => new ImageVm
+                {
+                    ImageId = x.ImageId,
+                    ImageUrl = x.ImageUrl,
+                    Caption = x.Caption,
+                    IsDefault = x.IsDefault,
+                    ProductId = x.ProductId
+                }).Where(x=>x.ProductId==product.ProductId).ToListAsync();
+                product.Images = listImageVm;
+            }
+            return products;
         }
 
-        public async Task<EcommerceShop.Application.Models.Product> PostProduct(ProductCreateRequest request)
+        public async Task<ProductVm> PostProduct(ProductCreateRequest request)
         {
             var product = new EcommerceShop.Application.Models.Product()
             {
@@ -80,10 +150,29 @@ namespace EcommerceShop.Application.Service.Product
             }
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
-            return product;
+            var listImageVm = await _context.Images.Select(x => new ImageVm
+            {
+                ImageId = x.ImageId,
+                ImageUrl = x.ImageUrl,
+                Caption = x.Caption,
+                IsDefault = x.IsDefault,
+                ProductId = x.ProductId
+            }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+            var productVm = new ProductVm()
+            {
+                ProductId=product.ProductId,
+                Name=product.Name,
+                Description=product.Description,
+                Price=product.Price,
+                Amount=product.Amount,
+                BrandId=product.BrandId,
+                CategoryId=product.CategoryId,
+                Images=listImageVm
+            };
+            return productVm;
         }
 
-        public async Task<EcommerceShop.Application.Models.Product> PutProduct(int ProductId,ProductUpdateRequest request)
+        public async Task<ProductVm> PutProduct(int ProductId,ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(ProductId);
 
@@ -116,7 +205,26 @@ namespace EcommerceShop.Application.Service.Product
                 }
             }
             await _context.SaveChangesAsync();
-            return product;
+            var listImageVm = await _context.Images.Select(x => new ImageVm
+            {
+                ImageId = x.ImageId,
+                ImageUrl = x.ImageUrl,
+                Caption = x.Caption,
+                IsDefault = x.IsDefault,
+                ProductId = x.ProductId
+            }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+            var productVm = new ProductVm()
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Amount = product.Amount,
+                BrandId = product.BrandId,
+                CategoryId = product.CategoryId,
+                Images = listImageVm
+            };
+            return productVm;
         }
         private async Task<string> SaveFile(IFormFile file)
         {

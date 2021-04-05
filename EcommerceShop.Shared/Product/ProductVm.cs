@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EcommerceShop.Shared.Image;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace EcommerceShop.Shared.Product
         public int Amount { get; set; }
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
-        public List<string> Images { get; set; }
+        public List<ImageVm> Images { get; set; }
     }
 }
