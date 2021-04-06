@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EcommerceShop.Application.Models
+namespace EcommerceShop.Shared.Order
 {
-    public class Order
+    public class OrderVm
     {
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public bool Status { get; set; }
         public string UserId { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

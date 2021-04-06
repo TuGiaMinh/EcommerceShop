@@ -20,6 +20,8 @@ using EcommerceShop.Application.Service.Category;
 using EcommerceShop.Application.Service.Product;
 using EcommerceShop.Application.Service.Storage;
 using EcommerceShop.Application.Service.Rating;
+using EcommerceShop.Application.Service.OrderDetail;
+using EcommerceShop.Application.Service.Order;
 
 namespace EcommerceShop.Backend
 {
@@ -47,6 +49,8 @@ namespace EcommerceShop.Backend
             services.AddTransient<IProductService,ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IRatingService, RatingService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderDetailService, OrderDetailService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddIdentityServer(options =>
             {

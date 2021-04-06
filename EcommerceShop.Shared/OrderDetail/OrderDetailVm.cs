@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EcommerceShop.Application.Models
+namespace EcommerceShop.Shared.OrderDetail
 {
-    public class OrderDetail
+    public class OrderDetailVm
     {
         public int OrderDetailId { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
     }
 }
