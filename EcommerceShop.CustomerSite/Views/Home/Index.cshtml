@@ -153,31 +153,38 @@
                 <!-- Card two -->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="~/img/categori/product4.png" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
+                        @foreach (var item in Model)
+                        {
+
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <div class="single-product mb-60">
+                                    <div class="product-img">
+                                        <img src="@backendUrl/@item.getFirstUrl()" alt="..." style="width:70%;height:70%" />
+                                        <div class="new-product">
+                                            <span>New</span>
+                                        </div>
                                     </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
+                                    <div class="product-caption">
+                                        <div class="product-ratting">
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star low-star"></i>
+                                            <i class="far fa-star low-star"></i>
+                                        </div>
+                                        <h4><a asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">@item.Name</a></h4>
+                                        <div class="price">
+                                            <ul>
+                                                <li style="color:red">@item.Price VND</li>
+                                            </ul>
+                                        </div>
+                                        <a class="btn btn-warning" asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">AddToCart</a>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                </div>
             </div>
             <!-- End Nav Card -->
         </div>

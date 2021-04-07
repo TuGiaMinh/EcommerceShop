@@ -1,0 +1,5 @@
+﻿@model IList<EcommerceShop.Shared.Category.CategoryVm>
+@foreach (var cat in Model)
+{
+    <li><a asp-action="GetProductByCategoryId" asp-controller="Products" asp-route-id="@cat.CategoryId"> @cat.Name</a></li>
+}

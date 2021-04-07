@@ -54,17 +54,17 @@
                                             <li>
                                                 <a asp-action="Index" asp-controller="Categories">Catagories</a>
                                                 <ul class="submenu">
-                                                    <li><a asp-action="Wax" asp-controller="Categories"> Product list</a></li>
-                                                    <li><a asp-action="Pomade" asp-controller="Categories"> Product Details</a></li>
-                                                    <li><a asp-action="Clay" asp-controller="Categories"> Product Details</a></li>
+                                                    @await Component.InvokeAsync("CategoryMenu") 
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a asp-action="Index" asp-controller="Brands">Brands</a>
+                                                <ul class="submenu">
+                                                    @await Component.InvokeAsync("BrandMenu")
                                                 </ul>
                                             </li>
                                             <li class="hot">
-                                                <a href="#">Latest</a>
-                                                <ul class="submenu">
-                                                    <li><a asp-action="Index" asp-controller="Products"> Product list</a></li>
-                                                    <li><a asp-action="Detail" asp-controller="Products"  asp-route-id="1"> Product Details</a></li>
-                                                </ul>
+                                                <a asp-action="Index" asp-controller="Products">Latest</a>
                                             </li>
                                             <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
                                         </ul>
