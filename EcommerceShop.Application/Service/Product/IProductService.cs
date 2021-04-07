@@ -10,6 +10,7 @@ namespace EcommerceShop.Application.Service.Product
 {
     public interface IProductService
     {
+        Task<ProductVm> GetProductById(int ProductId);
         Task<IEnumerable<ProductVm>> GetProducts();
         Task<IEnumerable<ProductVm>> GetProductByBrandId(int BrandId);
         Task<IEnumerable<ProductVm>> GetProductByCategoryId(int CategoryId);

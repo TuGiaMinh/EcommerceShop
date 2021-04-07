@@ -7,5 +7,6 @@ namespace EcommerceShop.CustomerSite.Service
     public interface IProductClient
     {
         Task<IList<ProductVm>> GetProducts();
+        Task<ProductVm> GetProduct(int ProductId);
     }
 }

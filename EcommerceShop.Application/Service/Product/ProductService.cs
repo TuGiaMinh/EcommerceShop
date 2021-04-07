@@ -79,7 +79,7 @@ namespace EcommerceShop.Application.Service.Product
                 Amount = x.Amount,
                 BrandId = x.BrandId,
                 CategoryId = x.CategoryId
-            }).Where(x=>x.BrandId==BrandId).ToListAsync();
+            }).Where(x => x.BrandId == BrandId).ToListAsync();
 
             foreach (ProductVm product in products)
             {
@@ -95,7 +95,30 @@ namespace EcommerceShop.Application.Service.Product
             }
             return products;
         }
-
+        public async Task<ProductVm> GetProductById(int ProductId)
+        {
+            var product = await _context.Products.Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).FirstOrDefaultAsync(x => x.ProductId == ProductId);
+            product.Images = new List<ImageVm>();
+            var listImageVm = await _context.Images.Select(x => new ImageVm
+            {
+                ImageId = x.ImageId,
+                ImageUrl = x.ImageUrl,
+                Caption = x.Caption,
+                IsDefault = x.IsDefault,
+                ProductId = x.ProductId
+            }).Where(x => x.ProductId == ProductId).ToListAsync();
+            product.Images = listImageVm;
+            return product;
+        }
         public async Task<IEnumerable<ProductVm>> GetProducts()
         {
             var products = await _context.Products.Select(x => new ProductVm
@@ -108,7 +131,7 @@ namespace EcommerceShop.Application.Service.Product
                 BrandId = x.BrandId,
                 CategoryId = x.CategoryId
             }).ToListAsync();
-            
+
             foreach (ProductVm product in products)
             {
                 var listImageVm = await _context.Images.Select(x => new ImageVm
@@ -118,7 +141,7 @@ namespace EcommerceShop.Application.Service.Product
                     Caption = x.Caption,
                     IsDefault = x.IsDefault,
                     ProductId = x.ProductId
-                }).Where(x=>x.ProductId==product.ProductId).ToListAsync();
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Images = listImageVm;
             }
             return products;
@@ -160,19 +183,19 @@ namespace EcommerceShop.Application.Service.Product
             }).Where(x => x.ProductId == product.ProductId).ToListAsync();
             var productVm = new ProductVm()
             {
-                ProductId=product.ProductId,
-                Name=product.Name,
-                Description=product.Description,
-                Price=product.Price,
-                Amount=product.Amount,
-                BrandId=product.BrandId,
-                CategoryId=product.CategoryId,
-                Images=listImageVm
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Amount = product.Amount,
+                BrandId = product.BrandId,
+                CategoryId = product.CategoryId,
+                Images = listImageVm
             };
             return productVm;
         }
 
-        public async Task<ProductVm> PutProduct(int ProductId,ProductUpdateRequest request)
+        public async Task<ProductVm> PutProduct(int ProductId, ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(ProductId);
 
@@ -234,6 +257,6 @@ namespace EcommerceShop.Application.Service.Product
             return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
         }
 
-        
+
     }
 }

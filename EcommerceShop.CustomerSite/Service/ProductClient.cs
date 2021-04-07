@@ -14,6 +14,14 @@ namespace EcommerceShop.CustomerSite.Service
         {
             _client = client;
         }
+        public async Task<ProductVm> GetProduct(int ProductId)
+        {
+            var response = await _client.GetAsync($"api/products/ProductId?ProductId={ProductId}");
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<ProductVm>();
+        }
         public async Task<IList<ProductVm>> GetProducts()
         {
             var response = await _client.GetAsync("api/products");
