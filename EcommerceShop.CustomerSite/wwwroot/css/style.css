@@ -2580,27 +2580,27 @@ input:focus::-moz-placeholder {
 
 /* line 715, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .padding-bottom {
-  padding-bottom: 250px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 715, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .padding-bottom {
-    padding-bottom: 250px;
+    padding-bottom: 20px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   /* line 715, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .padding-bottom {
-    padding-bottom: 150px;
+    padding-bottom: 20px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 715, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .padding-bottom {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
 }
 
@@ -2696,31 +2696,31 @@ input:focus::-moz-placeholder {
 
 /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .section-padding30 {
-  padding-top: 200px;
-  padding-bottom: 170px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .section-padding30 {
-    padding-top: 200px;
-    padding-bottom: 170px;
-  }
+    .section-padding30 {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 150px;
-    padding-bottom: 120px;
+    padding-top: 50px;
+    padding-bottom: 20px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
   .section-padding30 {
-    padding-top: 100px;
-    padding-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 20px;
   }
 }
 
@@ -2828,8 +2828,8 @@ input:focus::-moz-placeholder {
 
 /* line 848, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .latest-padding {
-  padding-top: 190px;
-  padding-bottom: 135px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
@@ -2874,53 +2874,53 @@ input:focus::-moz-placeholder {
 
 /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .footer-padding {
-  padding-top: 150px;
-  padding-bottom: 120px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .footer-padding {
-    padding-top: 150px;
-    padding-bottom: 120px;
-  }
+    .footer-padding {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .footer-padding {
-    padding-top: 100px;
-    padding-bottom: 70px;
-  }
+    .footer-padding {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .footer-padding {
-    padding-top: 100px;
-    padding-bottom: 70px;
-  }
+    .footer-padding {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .footer-padding {
-    padding-top: 30px;
-    padding-bottom: 70px;
-  }
+    .footer-padding {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 @media (max-width: 767px) {
   /* line 876, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-  .footer-padding {
-    padding-top: 70px;
-    padding-bottom: 70px;
-  }
+    .footer-padding {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 }
 
 /* line 900, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .footer-padding2 {
-  padding-bottom: 120px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
@@ -4353,14 +4353,35 @@ input:focus {
 
 /* line 23, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
 .latest-product-area .single-product .product-img {
-  margin-bottom: 30px;
-  position: relative;
+    margin-bottom: 30px;
+    position: relative;
+    padding-top: 100%;
+    border: 1px solid #bfbfbf;
+    border-radius: 15px;
 }
 
+/*.latest-product-area .single-product .product-img:after {
+    content:"";
+    display:block;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+}*/
+
 /* line 26, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
-.latest-product-area .single-product .product-img img {
-  width: 100%;
-}
+    .latest-product-area .single-product .product-img img {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 100% !important;
+        width: 100% !important;
+    }
 
 /* line 30, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
 .latest-product-area .single-product .product-img .new-product {
@@ -4399,13 +4420,15 @@ input:focus {
 .latest-product-area .single-product .product-caption .product-ratting i.low-star {
   color: #d3d3d3;
 }
-
+.latest-product-area .single-product .product-caption a{
+    margin-top:20px!important;
+}
 /* line 64, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
 .latest-product-area .single-product .product-caption .price ul li {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 500;
-  padding-right: 13px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 13px;
 }
 
 /* line 69, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */

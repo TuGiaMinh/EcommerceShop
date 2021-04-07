@@ -1,13 +1,19 @@
+using EcommerceShop.CustomerSite.Service;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace EcommerceShop.CustomerSite
@@ -32,7 +38,8 @@ namespace EcommerceShop.CustomerSite
                .AddCookie("Cookies")
                .AddOpenIdConnect("oidc", options =>
                {
-                   options.Authority = "https://localhost:44301";
+                   options.Authority = Configuration.GetServiceUri("backend").ToString();
+                   //options.Authority = "https://localhost:44301";
                    options.RequireHttpsMetadata = false;
                    options.GetClaimsFromUserInfoEndpoint = true;
 
@@ -52,7 +59,16 @@ namespace EcommerceShop.CustomerSite
                        RoleClaimType = "role"
                    };
                });
-            services.AddHttpClient();
+            var configureClient = new Action<IServiceProvider, HttpClient>(async (provider, client) =>
+            {
+                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+
+                client.BaseAddress = Configuration.GetServiceUri("backend");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            });
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpClient<IProductClient, ProductClient>(configureClient);
             services.AddControllersWithViews();
         }
 

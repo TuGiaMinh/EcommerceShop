@@ -18,5 +18,13 @@ namespace EcommerceShop.Shared.Product
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
         public List<ImageVm> Images { get; set; }
+        public string getFirstUrl()
+        {
+            if(Images.Count()==0)
+            {
+                return "Product don't have Image";
+            }
+            return Images.First().ImageUrl;
+        }
     }
 }

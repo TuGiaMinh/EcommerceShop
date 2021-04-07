@@ -1,4 +1,5 @@
 ﻿using EcommerceShop.CustomerSite.Models;
+using EcommerceShop.CustomerSite.Service;
 using EcommerceShop.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,14 +16,17 @@ namespace EcommerceShop.CustomerSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductClient _productApiClient;
+        public HomeController(ILogger<HomeController> logger, IProductClient productApiClient)
         {
             _logger = logger;
+            _productApiClient = productApiClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await _productApiClient.GetProducts();
+            return View(products);
         }
 
         public IActionResult Privacy()
