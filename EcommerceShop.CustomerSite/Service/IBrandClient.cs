@@ -9,5 +9,6 @@ namespace EcommerceShop.CustomerSite.Service
     public interface IBrandClient
     {
         Task<IList<BrandVm>> GetBrands();
+        Task<string> GetNameById(int BrandId);
     }
 }

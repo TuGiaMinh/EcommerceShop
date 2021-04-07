@@ -24,5 +24,15 @@ namespace EcommerceShop.CustomerSite.Service
 
             return await response.Content.ReadAsAsync<IList<CategoryVm>>();
         }
+
+        public async Task<string> GetNameById(int CategoryId)
+        {
+            var response = await _client.GetAsync($"api/categories/{CategoryId}");
+
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsAsync<CategoryVm>();
+
+            return result.Name;
+        }
     }
 }

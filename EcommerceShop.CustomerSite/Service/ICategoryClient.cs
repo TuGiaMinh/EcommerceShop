@@ -9,5 +9,6 @@ namespace EcommerceShop.CustomerSite.Service
     public interface ICategoryClient
     {
         Task<IList<CategoryVm>> GetCategories();
+        Task<string> GetNameById(int CategoryId);
     }
 }
