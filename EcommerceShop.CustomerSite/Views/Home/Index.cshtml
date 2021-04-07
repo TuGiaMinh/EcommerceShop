@@ -124,9 +124,6 @@
                                 <div class="single-product mb-60">
                                     <div class="product-img">
                                         <img src="@backendUrl/@item.getFirstUrl()" alt="..." style="width:70%;height:70%" />
-                                        <div class="new-product">
-                                            <span>New</span>
-                                        </div>
                                     </div>
                                     <div class="product-caption">
                                         <div class="product-ratting">
@@ -139,7 +136,7 @@
                                         <h4><a asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">@item.Name</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li style="color:red">@item.Price VND</li>
+                                                <li style="color:red;margin-bottom:20px;">@item.Price VND</li>
                                             </ul>
                                         </div>
                                         <a class="btn btn-warning" asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">AddToCart</a>

@@ -2983,7 +2983,7 @@ input:focus {
 
 /* line 936, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .section_padding {
-    padding: 200px 0px;
+    padding: 10px 10px !important;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -9072,7 +9072,21 @@ input:focus {
 .single_product_item {
     margin-bottom: 58px;
 }
-
+.single_product_item a img {
+    border: 1px solid #bfbfbf;
+    border-radius: 15px;
+}
+.single_product_item a img {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100% !important;
+    width: 100% !important;
+}
 @media (max-width: 991px) {
     /* line 12, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_trending_items.scss */
     .single_product_item {
@@ -9093,14 +9107,16 @@ input:focus {
     margin: 0 auto;
     text-align: center;
 }
-
+.single_product_item .price ul li{
+    margin-bottom:10px;
+}
 /* line 25, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_trending_items.scss */
 .single_product_item h3 {
     font-size: 24px;
     font-weight: 400;
-    margin-top: 22px;
+    margin-top: 15px;
     line-height: 1.5;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     font-family: "Poppins", sans-serif;
 }
 
@@ -13036,5 +13052,9 @@ input:focus {
         font-size: 30px;
     }
 }
-
+.my-product-img {
+    position: relative;
+    display: block;
+    padding-top: 100%;
+}
 /*# sourceMappingURL=style.css.map */

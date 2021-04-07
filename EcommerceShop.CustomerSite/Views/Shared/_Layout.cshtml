@@ -52,13 +52,13 @@
                                         <ul id="navigation">
                                             <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                                             <li>
-                                                <a asp-action="Index" asp-controller="Categories">Catagories</a>
+                                                <a href="#">Catagories</a>
                                                 <ul class="submenu">
                                                     @await Component.InvokeAsync("CategoryMenu") 
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a asp-action="Index" asp-controller="Brands">Brands</a>
+                                                <a href="#">Brands</a>
                                                 <ul class="submenu">
                                                     @await Component.InvokeAsync("BrandMenu")
                                                 </ul>

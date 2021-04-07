@@ -22,9 +22,10 @@ namespace EcommerceShop.CustomerSite.Controllers
             _categoryClient = categoryClient;
             _brandClient = brandClient;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products =await _productClient.GetProducts();
+            return View(products);
         }
         public async Task<IActionResult> Detail(int id)
         {
