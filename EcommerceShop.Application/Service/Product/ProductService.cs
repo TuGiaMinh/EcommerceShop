@@ -52,7 +52,7 @@ namespace EcommerceShop.Application.Service.Product
                 Amount = x.Amount,
                 BrandId = x.BrandId,
                 CategoryId = x.CategoryId
-            }).Where(x => x.BrandId == CategoryId).ToListAsync();
+            }).Where(x => x.CategoryId == CategoryId).ToListAsync();
 
             foreach (ProductVm product in products)
             {
@@ -118,6 +118,34 @@ namespace EcommerceShop.Application.Service.Product
             }).Where(x => x.ProductId == ProductId).ToListAsync();
             product.Images = listImageVm;
             return product;
+        }
+
+        public async Task<IEnumerable<ProductVm>> GetRelatedProducts(int ProductId,int CategoryId)
+        {
+            var products = await _context.Products.Include(c=>c.Category).Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).Where(x=>x.ProductId!=ProductId && x.CategoryId== CategoryId).Take(3).ToListAsync();
+
+            foreach (ProductVm product in products)
+            {
+                var listImageVm = await _context.Images.Select(x => new ImageVm
+                {
+                    ImageId = x.ImageId,
+                    ImageUrl = x.ImageUrl,
+                    Caption = x.Caption,
+                    IsDefault = x.IsDefault,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Images = listImageVm;
+            }
+            return products;
         }
         public async Task<IEnumerable<ProductVm>> GetProducts()
         {
@@ -256,7 +284,6 @@ namespace EcommerceShop.Application.Service.Product
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
         }
-
 
     }
 }

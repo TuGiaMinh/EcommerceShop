@@ -67,6 +67,13 @@
                                     <a class="my-product-img" asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">
                                         <img src="@backendUrl/@item.getFirstUrl()" alt="">
                                     </a>
+                                    <div class="product-ratting">
+                                        <i class="far fa-star" style="color:yellow"></i>
+                                        <i class="far fa-star" style="color:yellow"></i>
+                                        <i class="far fa-star" style="color:yellow"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
                                     <h3>
                                         <a asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId" style="text-align:center">
                                             @item.Name
@@ -77,13 +84,13 @@
                                             <li style="color:red">@item.Price VND</li>
                                         </ul>
                                     </div>
-                                    <a class="btn btn-warning" asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">AddToCart</a>
+
                                 </div>
                             </div>
                         }
                     </div>
                             <div class="load_more_btn text-center">
-                                <a href="#" class="btn_3">Load More</a>
+                                <a href="#" class="btn btn-primary">Load More</a>
                             </div>
                         </div>
             </div>

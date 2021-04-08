@@ -1,5 +1,5 @@
 ﻿@model IList<EcommerceShop.Shared.Brand.BrandVm>
 @foreach (var brand in Model)
 {
-    <li><a asp-action="GetProductByBrandId" asp-controller="Brands" asp-route-id="@brand.BrandId"> @brand.Name</a></li>
+    <li><a asp-action="GetProductByBrandId" asp-controller="Products" asp-route-id="@brand.BrandId"> @brand.Name</a></li>
 }

@@ -12,6 +12,7 @@ namespace EcommerceShop.Application.Service.Product
     {
         Task<ProductVm> GetProductById(int ProductId);
         Task<IEnumerable<ProductVm>> GetProducts();
+        Task<IEnumerable<ProductVm>> GetRelatedProducts(int ProductId, int CategoryId);
         Task<IEnumerable<ProductVm>> GetProductByBrandId(int BrandId);
         Task<IEnumerable<ProductVm>> GetProductByCategoryId(int CategoryId);
         Task<ProductVm> PostProduct(ProductCreateRequest request);

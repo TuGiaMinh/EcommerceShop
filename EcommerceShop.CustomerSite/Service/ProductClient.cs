@@ -22,9 +22,35 @@ namespace EcommerceShop.CustomerSite.Service
 
             return await response.Content.ReadAsAsync<ProductVm>();
         }
+
+        public async Task<IList<ProductVm>> GetProductByCategoryId(int CategoryId)
+        {
+            var response = await _client.GetAsync($"api/products/CategoryId?CategoryId={CategoryId}");
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
+        public async Task<IList<ProductVm>> GetProductByBrandId(int BrandId)
+        {
+            var response = await _client.GetAsync($"api/products/BrandId?BrandId={BrandId}");
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
         public async Task<IList<ProductVm>> GetProducts()
         {
             var response = await _client.GetAsync("api/products");
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
+
+        public async Task<IList<ProductVm>> GetRelatedProducts(int ProductId, int CategoryId)
+        {
+            var response = await _client.GetAsync($"api/products/RelateProductId?RelateProductId={ProductId}&CategoryId={CategoryId}");
 
             response.EnsureSuccessStatusCode();
 

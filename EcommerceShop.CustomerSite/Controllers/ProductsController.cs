@@ -32,9 +32,22 @@ namespace EcommerceShop.CustomerSite.Controllers
             var product = await _productClient.GetProduct(id);
             var categoryName = await _categoryClient.GetNameById(product.CategoryId);
             ViewBag.categoryName = categoryName;
-            var brandName = await _brandClient.GetNameById(product.BrandId);
-            ViewBag.brandName = brandName;
+            
             return View(product);
+        }
+        public async Task<IActionResult> GetProductByCategoryId(int id)
+        {
+            var products = await _productClient.GetProductByCategoryId(id);
+            var categoryName = await _categoryClient.GetNameById(id);
+            ViewBag.categoryName = categoryName;
+            return View(products);
+        }
+        public async Task<IActionResult> GetProductByBrandId(int id)
+        {
+            var products = await _productClient.GetProductByBrandId(id);
+            var brandName = await _brandClient.GetNameById(id);
+            ViewBag.brandName = brandName;
+            return View(products);
         }
     }
 }

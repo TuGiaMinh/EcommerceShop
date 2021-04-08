@@ -26,6 +26,13 @@ namespace EcommerceShop.Backend.Controllers
             var products = await _productService.GetProducts();
             return Ok(products);
         }
+        [HttpGet("RelateProductId")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<ProductVm>>> GetRelatedProducts(int RelateProductId, int CategoryId)
+        {
+            var product = await _productService.GetRelatedProducts(RelateProductId,CategoryId);
+            return Ok(product);
+        }
         [HttpGet("ProductId")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductVm>>> GetProductById(int ProductId)
