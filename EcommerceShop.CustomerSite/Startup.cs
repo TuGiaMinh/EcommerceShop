@@ -68,6 +68,7 @@ namespace EcommerceShop.CustomerSite
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             });
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpClient<IRatingClient, RatingClient>(configureClient);
             services.AddHttpClient<IBrandClient, BrandClient>(configureClient);
             services.AddHttpClient<ICategoryClient, CategoryClient>(configureClient);
             services.AddHttpClient<IProductClient, ProductClient>(configureClient);

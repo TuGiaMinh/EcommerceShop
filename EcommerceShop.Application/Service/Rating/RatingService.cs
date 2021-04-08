@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,8 +77,17 @@ namespace EcommerceShop.Application.Service.Rating
                 UserId = request.UserId,
                 ProductId = request.ProductId
             };
-            _context.Ratings.Add(rating);
-            await _context.SaveChangesAsync();
+            var result = await _context.Ratings.Where(r => r.UserId == request.UserId && r.ProductId == request.ProductId).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                throw new Exception("Cannot Create Rating");
+            }
+            else
+            {
+                _context.Ratings.Add(rating);
+                await _context.SaveChangesAsync();
+            }
+           
             var ratingVm = new RatingVm() 
             {
                 RatingId=rating.RatingId,

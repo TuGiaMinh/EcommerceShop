@@ -37,6 +37,7 @@
             </div>
             <div class="col-lg-8">
                 <div class="single_product_text text-center">
+                    <input hidden asp-for="@Model.ProductId" />
                     <h3>
                         @Model.Name<br>
 
@@ -50,13 +51,20 @@
                     <h4>
                         Hàng có sẵn : @Model.Amount
                     </h4>
-                    <div class="product-ratting">
-                        <i class="far fa-star" style="color:yellow"></i>
-                        <i class="far fa-star" style="color:yellow"></i>
-                        <i class="far fa-star" style="color:yellow"></i>
-                        <i class="far fa-star low-star"></i>
-                        <i class="far fa-star low-star"></i>
-                    </div>
+                    <p>
+                        <span>
+                            @{
+                                for (int i = 1; i <= Model.total(); i++)
+                                {
+                                    <i class="fas fa-star" style="color:yellow"></i>
+                                }
+                                for (int i = 1; i <= 5-Model.total(); i++)
+                                {
+                                    <i class="far fa-star"></i>
+                                }
+                            }
+                        </span>
+                    </p>
                     <p>
                         @Model.Description
                     </p>
@@ -79,6 +87,7 @@
         </div>
     </div>
 </div>
+@await Component.InvokeAsync("RatingProduct", new { ProductId = Model.ProductId})
 @await Component.InvokeAsync("RelatedProducts", new { RelatedProductId = Model.ProductId, CategoryId = Model.CategoryId })
 <!--================End Single Product Area =================-->
 <!-- subscribe part here -->

@@ -1,4 +1,5 @@
 ﻿using EcommerceShop.CustomerSite.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,6 +28,7 @@ namespace EcommerceShop.CustomerSite.Controllers
             var products =await _productClient.GetProducts();
             return View(products);
         }
+        [Authorize]
         public async Task<IActionResult> Detail(int id)
         {
             var product = await _productClient.GetProduct(id);

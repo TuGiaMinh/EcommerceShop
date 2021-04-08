@@ -14,5 +14,6 @@ namespace EcommerceShop.Shared.Rating
         public string FeedBack { get; set; }
         public string UserId { get; set; }
         public int ProductId { get; set; }
+
     }
 }

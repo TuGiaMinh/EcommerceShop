@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceShop.Backend.Controllers
@@ -42,8 +43,11 @@ namespace EcommerceShop.Backend.Controllers
         }
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<RatingCreateRequest>>> PostRating([FromForm] RatingCreateRequest request)
+        public async Task<ActionResult<RatingCreateRequest>> PostRating(RatingCreateRequest request)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            string userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            request.UserId = userId;
             var rating = await _ratingService.PostRating(request);
             return Ok(rating);
         }

@@ -3,6 +3,7 @@ using EcommerceShop.Application.Models;
 using EcommerceShop.Application.Service.Storage;
 using EcommerceShop.Shared.Image;
 using EcommerceShop.Shared.Product;
+using EcommerceShop.Shared.Rating;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,11 +34,13 @@ namespace EcommerceShop.Application.Service.Product
             {
                 throw new Exception("Cannot find id");
             }
-            var images = _context.Images.Where(i => i.ProductId == ProductId);
+            var images = await _context.Images.Where(i => i.ProductId == ProductId).ToListAsync();
             foreach (var image in images)
             {
                 await _storageService.DeleteFileAsync(image.ImageUrl);
             }
+            var rates = await _context.Ratings.Where(i => i.ProductId == ProductId).ToListAsync();
+            _context.Ratings.RemoveRange(rates);
             _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
         }
@@ -65,6 +68,16 @@ namespace EcommerceShop.Application.Service.Product
                     ProductId = x.ProductId
                 }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Images = listImageVm;
+                product.Ratings = new List<RatingVm>();
+                var listRate = await _context.Ratings.Select(x => new RatingVm
+                {
+                    RatingId = x.RatingId,
+                    RateValue = x.RateValue,
+                    FeedBack = x.FeedBack,
+                    UserId = x.UserId,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Ratings = listRate;
             }
             return products;
         }
@@ -92,6 +105,16 @@ namespace EcommerceShop.Application.Service.Product
                     ProductId = x.ProductId
                 }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Images = listImageVm;
+                product.Ratings = new List<RatingVm>();
+                var listRate = await _context.Ratings.Select(x => new RatingVm
+                {
+                    RatingId = x.RatingId,
+                    RateValue = x.RateValue,
+                    FeedBack = x.FeedBack,
+                    UserId = x.UserId,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Ratings = listRate;
             }
             return products;
         }
@@ -117,6 +140,16 @@ namespace EcommerceShop.Application.Service.Product
                 ProductId = x.ProductId
             }).Where(x => x.ProductId == ProductId).ToListAsync();
             product.Images = listImageVm;
+            product.Ratings = new List<RatingVm>();
+            var listRate = await _context.Ratings.Select(x => new RatingVm
+            {
+                RatingId = x.RatingId,
+                RateValue = x.RateValue,
+                FeedBack = x.FeedBack,
+                UserId = x.UserId,
+                ProductId = x.ProductId
+            }).Where(x => x.ProductId == ProductId).ToListAsync();
+            product.Ratings = listRate;
             return product;
         }
 
@@ -144,6 +177,16 @@ namespace EcommerceShop.Application.Service.Product
                     ProductId = x.ProductId
                 }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Images = listImageVm;
+                product.Ratings = new List<RatingVm>();
+                var listRate = await _context.Ratings.Select(x => new RatingVm
+                {
+                    RatingId = x.RatingId,
+                    RateValue = x.RateValue,
+                    FeedBack = x.FeedBack,
+                    UserId = x.UserId,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == ProductId).ToListAsync();
+                product.Ratings = listRate;
             }
             return products;
         }
@@ -171,6 +214,16 @@ namespace EcommerceShop.Application.Service.Product
                     ProductId = x.ProductId
                 }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Images = listImageVm;
+                product.Ratings = new List<RatingVm>();
+                var listRate = await _context.Ratings.Select(x => new RatingVm
+                {
+                    RatingId = x.RatingId,
+                    RateValue = x.RateValue,
+                    FeedBack = x.FeedBack,
+                    UserId = x.UserId,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Ratings = listRate;
             }
             return products;
         }
@@ -255,6 +308,7 @@ namespace EcommerceShop.Application.Service.Product
                     });
                 }
             }
+
             await _context.SaveChangesAsync();
             var listImageVm = await _context.Images.Select(x => new ImageVm
             {
@@ -262,6 +316,14 @@ namespace EcommerceShop.Application.Service.Product
                 ImageUrl = x.ImageUrl,
                 Caption = x.Caption,
                 IsDefault = x.IsDefault,
+                ProductId = x.ProductId
+            }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+            var listRate = await _context.Ratings.Select(x => new RatingVm
+            {
+                RatingId = x.RatingId,
+                RateValue = x.RateValue,
+                FeedBack = x.FeedBack,
+                UserId = x.UserId,
                 ProductId = x.ProductId
             }).Where(x => x.ProductId == product.ProductId).ToListAsync();
             var productVm = new ProductVm()
@@ -273,7 +335,8 @@ namespace EcommerceShop.Application.Service.Product
                 Amount = product.Amount,
                 BrandId = product.BrandId,
                 CategoryId = product.CategoryId,
-                Images = listImageVm
+                Images = listImageVm,
+                Ratings = listRate
             };
             return productVm;
         }

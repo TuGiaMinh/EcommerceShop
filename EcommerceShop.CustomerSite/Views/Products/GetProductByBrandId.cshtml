@@ -68,13 +68,20 @@
                                         </a>
                                     </div>
                                     <div class="product-caption">
-                                        <div class="product-ratting">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star low-star"></i>
-                                            <i class="far fa-star low-star"></i>
-                                        </div>
+                                        <p>
+                                            <span>
+                                                @{
+                                                    for (int i = 1; i <= item.total(); i++)
+                                                    {
+                                                        <i class="fas fa-star" style="color:yellow"></i>
+                                                    }
+                                                    for (int i = 1; i <= 5 - item.total(); i++)
+                                                    {
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                }
+                                            </span>
+                                        </p>
                                         <h4><a asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId">@item.Name</a></h4>
                                         <div class="price">
                                             <ul>

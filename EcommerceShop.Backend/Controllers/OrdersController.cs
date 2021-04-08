@@ -29,7 +29,7 @@ namespace EcommerceShop.Backend.Controllers
         public async Task<IActionResult> Create(List<int> productIds)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            string userId = claimsIdentity.Claims.ToList().ElementAt(5).Value;
+            string userId = claimsIdentity.Claims.ToList().ElementAt(7).Value;
             await _orderService.CreateAsync(productIds, userId);
             return StatusCode(201);
         }
