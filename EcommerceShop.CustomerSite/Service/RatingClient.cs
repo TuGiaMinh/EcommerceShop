@@ -26,5 +26,13 @@ namespace EcommerceShop.CustomerSite.Service
 
             return await response.Content.ReadAsAsync<RatingVm>();
         }
+
+        public async Task<IEnumerable<RatingVm>> GetAll(int ProductId)
+        {
+            var response = await _client.GetAsync($"api/rating/ProductId?ProductId={ProductId}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<IEnumerable<RatingVm>>();
+        }
     }
 }

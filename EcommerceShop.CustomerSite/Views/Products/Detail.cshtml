@@ -58,7 +58,7 @@
                                 {
                                     <i class="fas fa-star" style="color:yellow"></i>
                                 }
-                                for (int i = 1; i <= 5-Model.total(); i++)
+                                for (int i = 1; i <= 5 - Model.total(); i++)
                                 {
                                     <i class="far fa-star"></i>
                                 }
@@ -85,9 +85,18 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                @await Component.InvokeAsync("DetailRating", new { ProductId = Model.ProductId })
+             
+            </div>
+            <div class="col-lg-6">
+                @await Component.InvokeAsync("RatingProduct", new { ProductId = Model.ProductId })
+            </div>
+        </div>
     </div>
 </div>
-@await Component.InvokeAsync("RatingProduct", new { ProductId = Model.ProductId})
 @await Component.InvokeAsync("RelatedProducts", new { RelatedProductId = Model.ProductId, CategoryId = Model.CategoryId })
 <!--================End Single Product Area =================-->
 <!-- subscribe part here -->

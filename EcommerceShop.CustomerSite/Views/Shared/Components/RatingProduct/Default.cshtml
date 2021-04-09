@@ -19,7 +19,7 @@
             <!-- card one -->
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                         <form asp-action="Create" asp-controller="Ratings" method="post">
                             <input type="hidden" asp-for="@Model.ProductId" />
                             <div class="form-group">
@@ -32,9 +32,10 @@
                                     <i class="ratingStar far fa-star" data-value="5"></i>
                                 </span>
                                 <input type="hidden" asp-for="@Model.RateValue"/>
-                                <input type="text" asp-for="@Model.FeedBack" placeholder="Enter Feedback">
+                                <br/>
+                                <textarea asp-for="@Model.FeedBack" placeholder="Enter Feedback" style="width:100%;padding:10px 10px;"> </textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
                         </form>
                     </div>
                 </div>

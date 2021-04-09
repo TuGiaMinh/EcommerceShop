@@ -9,5 +9,6 @@ namespace EcommerceShop.CustomerSite.Service
     public interface IRatingClient
     {
         Task<RatingVm> CreateRating(RatingCreateRequest request);
+        Task<IEnumerable<RatingVm>> GetAll(int ProductId);
     }
 }
