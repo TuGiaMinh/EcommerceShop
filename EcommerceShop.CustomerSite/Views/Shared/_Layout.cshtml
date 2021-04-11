@@ -75,7 +75,7 @@
                                 <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                     <li>
                                         <div class="shopping-card">
-                                            <a asp-action="Index" asp-controller="ShoppingCart" ><i class="fas fa-shopping-cart"></i></a>
+                                            @await Component.InvokeAsync("ShoppingCart")
                                         </div>
                                     </li>
                                     @if (User.Identity.IsAuthenticated)

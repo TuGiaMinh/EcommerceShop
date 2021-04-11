@@ -1,0 +1,11 @@
+﻿@using EcommerceShop.Shared.Order
+@model Cart
+<div class="shopping-card">
+    @if(Model != null) {
+    <a asp-action="Index" asp-controller="ShoppingCart"><i class="fas fa-shopping-cart"><span style="font-size: 16px; color: red; padding: 5px;">@Model.Items.Count()</span></i></a>
+    }
+    else{
+    <a asp-action="Index" asp-controller="ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
+    }
+
+</div>
