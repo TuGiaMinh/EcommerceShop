@@ -9,7 +9,7 @@ namespace EcommerceShop.Application.Service.Order
 {
     public interface IOrderService
     {
-        Task<OrderVm> CreateAsync(List<int> productIds, string userId);
+        Task<OrderVm> CreateAsync(IList<CartItem> items, string userId);
 
         Task<IEnumerable<Models.Order>> GetMyOrderByUserId(string userId);
         Task<bool> DeleteMyOrder(int orderId);

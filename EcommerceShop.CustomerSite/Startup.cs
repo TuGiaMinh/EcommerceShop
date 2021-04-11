@@ -72,7 +72,12 @@ namespace EcommerceShop.CustomerSite
             services.AddHttpClient<IBrandClient, BrandClient>(configureClient);
             services.AddHttpClient<ICategoryClient, CategoryClient>(configureClient);
             services.AddHttpClient<IProductClient, ProductClient>(configureClient);
+            services.AddHttpClient<IOrderClient, OrderClient>(configureClient);
             services.AddControllersWithViews();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +100,7 @@ namespace EcommerceShop.CustomerSite
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

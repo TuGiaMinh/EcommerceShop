@@ -1,0 +1,113 @@
+﻿@using EcommerceShop.Shared.Order
+@model Cart
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var backendUrl = Configuration.GetServiceUri("backend");
+    decimal totalPrice = 0;
+    decimal subTotal = 0;
+}
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Card List</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- slider Area End-->
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price (VND)</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total (VND)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <a asp-action="Index" asp-controller="Products" asp-route-id="@item.Product.ProductId"><img src="@backendUrl/@item.Product.getFirstUrl()" alt="" /></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@item.Product.Name</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>@item.Product.Price </h5>
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                                    {
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <input type="hidden" asp-for="@item.Product.ProductId" name="ProductId" />
+                                                <input class="input-number" style="width:40px;height:30px;margin-top: 65%;" type="number" asp-for="@item.Quantity" name="Quantity" min="1" max="@item.Product.Amount">
+                                            </div>
+                                            <div class="media-body">
+                                                <input class="btn btn-danger" style=" margin-top: 10%; padding-left: 20px; padding-right: 20px; margin-left: -25px;background-color: palevioletred;"type="submit" value="Update" />
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="product_count">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>
+                                        @{
+                                            totalPrice = item.Product.Price * item.Quantity;
+                                            subTotal += item.Product.Price * item.Quantity;
+                                        } @totalPrice
+                                    </h5>
+                                </td>
+                                <td><a class="btn btn-danger" style="background-color:red;padding-left: 20px; padding-right: 20px;" asp-action="RemoveCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.ProductId">Remove</a></td>
+                            </tr>
+                        }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h5>Subtotal</h5>
+                        </td>
+                        <td>
+                            <h5>@subTotal</h5>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" asp-action="Index" asp-controller="Products">Continue Shopping</a>
+                    <a class="btn_1 checkout_btn_1" asp-action="Checkout" asp-controller="ShoppingCart">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
+</script>

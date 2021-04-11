@@ -17,12 +17,12 @@ namespace EcommerceShop.Application.Service.OrderDetail
         {
             _context = context;
         }
-        public async Task<Models.OrderDetail> CreateAsync(int OrderId,int ProductId)
+        public async Task<Models.OrderDetail> CreateAsync(int OrderId,int ProductId,int Amount)
         {
             var product = await _context.Products.FindAsync(ProductId);
             var orderDetail = new Models.OrderDetail
             {
-                Amount= 1,
+                Amount= Amount,
                 Price=product.Price,
                 OrderId = OrderId,
                 ProductId = ProductId,

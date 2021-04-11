@@ -21,7 +21,7 @@ namespace EcommerceShop.Application.Service.Order
             _orderDetailService = orderDetailService;
         }
 
-        public async Task<OrderVm> CreateAsync(List<int> productIds, string userId)
+        public async Task<OrderVm> CreateAsync(IList<CartItem> items, string userId)
         {
             var order = new Models.Order()
             {
@@ -32,9 +32,9 @@ namespace EcommerceShop.Application.Service.Order
 
             _context.Add(order);
             await _context.SaveChangesAsync();
-            foreach (int productId in productIds)
+            foreach (var item in items)
             {
-                await _orderDetailService.CreateAsync(order.OrderId, productId);
+                await _orderDetailService.CreateAsync(order.OrderId, item.Product.ProductId,item.Quantity);
             }
             var orderVm = new OrderVm()
             {

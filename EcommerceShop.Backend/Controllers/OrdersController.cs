@@ -1,5 +1,6 @@
 ﻿using EcommerceShop.Application.Service.Order;
 using EcommerceShop.Application.Service.OrderDetail;
+using EcommerceShop.Shared.Order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,11 +27,11 @@ namespace EcommerceShop.Backend.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(List<int> productIds)
+        public async Task<IActionResult> Create(IList<CartItem> items)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            string userId = claimsIdentity.Claims.ToList().ElementAt(7).Value;
-            await _orderService.CreateAsync(productIds, userId);
+            string userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await _orderService.CreateAsync(items, userId);
             return StatusCode(201);
         }
         [HttpDelete]

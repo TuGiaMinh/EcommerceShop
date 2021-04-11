@@ -75,7 +75,7 @@
                                 <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                     <li>
                                         <div class="shopping-card">
-                                            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                            <a asp-action="Index" asp-controller="ShoppingCart" ><i class="fas fa-shopping-cart"></i></a>
                                         </div>
                                     </li>
                                     @if (User.Identity.IsAuthenticated)

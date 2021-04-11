@@ -9,7 +9,7 @@ namespace EcommerceShop.Application.Service.OrderDetail
 {
     public interface IOrderDetailService
     {
-        Task<Models.OrderDetail> CreateAsync(int OrderId, int ProductId);
+        Task<Models.OrderDetail> CreateAsync(int OrderId, int ProductId,int Amount);
         Task<Models.OrderDetail> DeleteAsync(int orderId, int productId);
 
         Task<bool> OrderDetailExistsAsync(int orderId);
