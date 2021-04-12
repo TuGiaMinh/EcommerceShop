@@ -1,6 +1,7 @@
 ﻿using EcommerceShop.Application.Service.Order;
 using EcommerceShop.Application.Service.OrderDetail;
 using EcommerceShop.Shared.Order;
+using EcommerceShop.Shared.OrderDetail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,11 +44,20 @@ namespace EcommerceShop.Backend.Controllers
             await _orderService.DeleteMyOrder(OrderId);
             return StatusCode(201);
         }
-        [HttpGet("UserId")]
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetOrdersByUserId(string UserId)
+        public async Task<IActionResult> GetOrdersByUserId()
         {
-            var orders = await _orderService.GetMyOrderByUserId(UserId);
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            string userId = claimsIdentity.Claims.ToList().ElementAt(5).Value;
+            var orders = await _orderService.GetMyOrderByUserId(userId);
+            return Ok(orders);
+        }
+        [HttpGet("OrderId")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetOrderDetailsByUserId(int OrderId)
+        {
+            var orders = await _orderDetailService.GetOrderDetailByOrderId(OrderId);
             return Ok(orders);
         }
     }

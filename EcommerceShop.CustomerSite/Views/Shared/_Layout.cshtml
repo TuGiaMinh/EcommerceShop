@@ -50,23 +50,23 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                                            <li><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
                                             <li>
-                                                <a href="#">Catagories</a>
+                                                <a href="#">Thể loại</a>
                                                 <ul class="submenu">
                                                     @await Component.InvokeAsync("CategoryMenu") 
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#">Brands</a>
+                                                <a href="#">Xuất xứ</a>
                                                 <ul class="submenu">
                                                     @await Component.InvokeAsync("BrandMenu")
                                                 </ul>
                                             </li>
                                             <li class="hot">
-                                                <a asp-action="Index" asp-controller="Products">Latest</a>
+                                                <a asp-action="Index" asp-controller="Products">Sản phẩm mới</a>
                                             </li>
-                                            <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
+                                            <li><a asp-action="Index" asp-controller="Orders">Đơn hàng</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -83,12 +83,12 @@
                                         <li class="d-none d-lg-block">
                                             <span class="navbar-text text-dark">Hello<a class="text-dark" asp-controller="Account" asp-action="MyProfile">@User.Identity.Name</a></span>
                                         </li>
-                                        <li class="d-none d-lg-block"> <a class="btn header-btn" asp-controller="Account" asp-action="SignOut">SignOut</a></li>
+                                        <li class="d-none d-lg-block"> <a class="btn header-btn" asp-controller="Account" asp-action="SignOut">LogOut</a></li>
                                     }
                                     else
                                     {
 
-                                        <li class="d-none d-lg-block"> <a class="btn header-btn" asp-controller="Account" asp-action="SignIn">SignIn</a></li>
+                                        <li class="d-none d-lg-block"> <a class="btn header-btn" asp-controller="Account" asp-action="SignIn">LogIn</a></li>
                                     }
                                 </ul>
                             </div>

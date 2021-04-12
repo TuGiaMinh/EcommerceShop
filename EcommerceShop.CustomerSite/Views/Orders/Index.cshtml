@@ -1,0 +1,63 @@
+﻿@using EcommerceShop.Shared.Order
+@model IList<OrderVm>
+
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Danh sách đơn hàng</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- slider Area End-->
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ngày đặt hàng</th>
+                            <th scope="col">Tình trạng</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h5>@item.OrderDate</h5>
+                                </td>
+                                <td>
+                                    @if (item.Status)
+                                    {
+                                        <h5>Đơn đã duyệt</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>Đơn chưa duyệt</h5>
+                                    }
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" asp-action="OrderDetail" asp-controller="Orders" asp-route-id="@item.OrderId">Chi tiết</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" asp-action="Index" asp-controller="Products">Tiếp tục mua hàng</a>
+                </div>
+            </div>
+        </div>
+</section>

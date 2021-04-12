@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Card List</h2>
+                        <h2>Giỏ hàng</h2>
                     </div>
                 </div>
             </div>
@@ -30,10 +30,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price (VND)</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total (VND)</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Giá tiền</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tổng</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@
                                                 <input class="input-number" style="width:40px;height:30px;margin-top: 65%;" type="number" asp-for="@item.Quantity" name="Quantity" min="1" max="@item.Product.Amount">
                                             </div>
                                             <div class="media-body">
-                                                <input class="btn btn-danger" style=" margin-top: 10%; padding-left: 20px; padding-right: 20px; margin-left: -25px;background-color: palevioletred;"type="submit" value="Update" />
+                                                <input class="btn btn-danger" style=" margin-top: 10%; padding-left: 20px; padding-right: 20px; margin-left: -25px;background-color: palevioletred;"type="submit" value="Cập nhật" />
                                             </div>
                                         </div>
                                     }
@@ -80,7 +80,7 @@
                                         } @totalPrice
                                     </h5>
                                 </td>
-                                <td><a class="btn btn-danger" style="background-color:red;padding-left: 20px; padding-right: 20px;" asp-action="RemoveCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.ProductId">Remove</a></td>
+                                <td><a class="btn btn-danger" style="background-color:red;padding-left: 20px; padding-right: 20px;" asp-action="RemoveCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.ProductId">Xóa</a></td>
                             </tr>
                         }
                     <tr>
@@ -88,7 +88,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <h5>Subtotal</h5>
+                            <h5>Tổng cộng</h5>
                         </td>
                         <td>
                             <h5>@subTotal</h5>
@@ -97,8 +97,8 @@
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" asp-action="Index" asp-controller="Products">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" asp-action="Checkout" asp-controller="ShoppingCart">Proceed to checkout</a>
+                    <a class="btn_1" asp-action="Index" asp-controller="Products">Tiếp tục mua hàng</a>
+                    <a class="btn_1 checkout_btn_1" asp-action="Checkout" asp-controller="ShoppingCart">Đặt hàng</a>
                 </div>
             </div>
         </div>

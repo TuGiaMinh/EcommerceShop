@@ -1,0 +1,88 @@
+﻿@using EcommerceShop.Shared.OrderDetail
+@model IList<OrderDetailVm>
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var backendUrl = Configuration.GetServiceUri("backend");
+    decimal totalPrice = 0;
+    decimal subTotal = 0;
+}
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Danh sách sản phẩm</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- slider Area End-->
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Giá tiền</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <a asp-action="Detail" asp-controller="Products" asp-route-id="@item.ProductId"><img src="@backendUrl/@item.ProductImg" alt="" /></a>
+                                            
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@item.ProductName</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>@item.Price </h5>
+                                </td>
+                                <td>
+                                    <h5>@item.Amount </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        @{
+                                            totalPrice = item.Price * item.Amount;
+                                            subTotal += item.Price * item.Amount;
+                                        } @totalPrice
+                                    </h5>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>Tổng cộng</h5>
+                            </td>
+                            <td>
+                                <h5>@subTotal</h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" asp-action="Index" asp-controller="Products">Tiếp tục mua hàng</a>
+                </div>
+            </div>
+        </div>
+        </div>
+</section>

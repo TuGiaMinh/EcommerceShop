@@ -13,5 +13,6 @@ namespace EcommerceShop.Application.Service.OrderDetail
         Task<Models.OrderDetail> DeleteAsync(int orderId, int productId);
 
         Task<bool> OrderDetailExistsAsync(int orderId);
+        Task<IList<OrderDetailVm>> GetOrderDetailByOrderId(int orderId);
     }
 }

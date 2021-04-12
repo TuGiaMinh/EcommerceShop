@@ -51,5 +51,16 @@ namespace EcommerceShop.Application.Service.OrderDetail
                 return true;
             return false;
         }
+        public async Task<IList<OrderDetailVm>> GetOrderDetailByOrderId(int orderId)
+        {
+            var results = await _context.OrderDetails.Where(odd => odd.OrderId == orderId).Select(odd=>new OrderDetailVm { 
+                OrderDetailId=odd.OrderDetailId,
+                Amount=odd.Amount,
+                Price=odd.Price,
+                OrderId=odd.OrderId,
+                ProductId=odd.ProductId
+            }).ToListAsync();
+            return results;
+        }
     }
 }
