@@ -5,6 +5,7 @@ using EcommerceShop.Shared.Image;
 using EcommerceShop.Shared.Product;
 using EcommerceShop.Shared.Rating;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -190,9 +191,9 @@ namespace EcommerceShop.Application.Service.Product
             }
             return products;
         }
-        public async Task<IEnumerable<ProductVm>> GetProducts()
+        public async Task<ProductPaginationVm> GetProducts(PagingRequestVm pagingRequestVm)
         {
-            var products = await _context.Products.Select(x => new ProductVm
+            var products =  _context.Products.Select(x => new ProductVm
             {
                 ProductId = x.ProductId,
                 Name = x.Name,
@@ -201,9 +202,20 @@ namespace EcommerceShop.Application.Service.Product
                 Amount = x.Amount,
                 BrandId = x.BrandId,
                 CategoryId = x.CategoryId
-            }).ToListAsync();
+            }).AsQueryable();
+            
+            int count = products.Count();
 
-            foreach (ProductVm product in products)
+            int CurrentPage = pagingRequestVm.pageNumber;
+
+            int? PageSize = pagingRequestVm.pageSize;
+
+            int TotalCount = count;
+
+            int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
+            var items = await products.Skip((CurrentPage - 1) * PageSize.Value).Take(PageSize.Value).ToListAsync();
+            foreach (ProductVm product in items)
             {
                 var listImageVm = await _context.Images.Select(x => new ImageVm
                 {
@@ -225,7 +237,20 @@ namespace EcommerceShop.Application.Service.Product
                 }).Where(x => x.ProductId == product.ProductId).ToListAsync();
                 product.Ratings = listRate;
             }
-            return products;
+            var previousPage = CurrentPage > 1;
+
+            var nextPage = CurrentPage < TotalPages;
+            ProductPaginationVm result = new ProductPaginationVm
+            {
+                items = items,
+                totalCount = TotalCount,
+                pageSize = PageSize.Value,
+                currentPage = CurrentPage,
+                totalPages = TotalPages,
+                previousPage = previousPage,
+                nextPage = nextPage
+            };
+            return result;
         }
 
         public async Task<ProductVm> PostProduct(ProductCreateRequest request)

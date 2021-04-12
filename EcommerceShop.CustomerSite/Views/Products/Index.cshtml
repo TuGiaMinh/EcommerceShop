@@ -1,5 +1,5 @@
 ﻿@using EcommerceShop.Shared.Product
-@model IList<ProductVm>
+@model ProductPaginationVm
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 @{
@@ -60,7 +60,7 @@
             <div class="col-md-8">
                 <div class="product_list">
                     <div class="row">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.items)
                         {
                             <div class="col-lg-6 col-sm-6">
                                 <div class="single_product_item">
@@ -95,11 +95,26 @@
                                 </div>
                             </div>
                         }
-                    </div>
-                            <div class="load_more_btn text-center">
-                                <a href="#" class="btn btn-primary">Load More</a>
-                            </div>
+                        @{
+                            PaginateRouteVm route = new PaginateRouteVm()
+                            {
+                                ControllerName = "Products",
+                                ActionName = "index",
+                                totalCount = Model.totalCount,
+                                pageSize = Model.pageSize,
+                                currentPage = Model.currentPage,
+                                totalPages = Model.totalPages,
+                                previousPage = Model.previousPage,
+                                nextPage = Model.nextPage
+                            };
+                        }
+                        <div class="row" style="margin-left: 40%;">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4"> <partial name="_PaginatePartial" model="route" /></div>
+                            <div class="col-lg-4"></div>
                         </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

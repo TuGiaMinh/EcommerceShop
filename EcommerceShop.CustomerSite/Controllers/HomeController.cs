@@ -1,6 +1,7 @@
 ﻿using EcommerceShop.CustomerSite.Models;
 using EcommerceShop.CustomerSite.Service;
 using EcommerceShop.Shared;
+using EcommerceShop.Shared.Product;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -23,10 +24,10 @@ namespace EcommerceShop.CustomerSite.Controllers
             _productApiClient = productApiClient;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber=1,int pageSize=3)
         {
-            var products = await _productApiClient.GetProducts();
-            return View(products);
+            var result = await _productApiClient.GetProducts(pageNumber, pageSize);
+            return View(result);
         }
 
         public IActionResult Privacy()

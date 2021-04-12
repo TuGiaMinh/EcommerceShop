@@ -23,9 +23,9 @@ namespace EcommerceShop.CustomerSite.Controllers
             _categoryClient = categoryClient;
             _brandClient = brandClient;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber=1,int pageSize=4)
         {
-            var products =await _productClient.GetProducts();
+            var products =await _productClient.GetProducts(pageNumber, pageSize);
             return View(products);
         }
         public async Task<IActionResult> Detail(int id)

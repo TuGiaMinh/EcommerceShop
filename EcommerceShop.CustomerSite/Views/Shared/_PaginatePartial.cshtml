@@ -1,0 +1,100 @@
+﻿@model PaginateRouteVm
+<div style="display: flex; justify-content: center;">
+    <div class="Col">
+        <ul class="pagination">
+            @if (Model.previousPage == true)
+            {
+                <li class="page-item">
+                    <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage - 1)" class="page-link">
+                        <i class="fas fa-backward"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage - 1)" class="page-link">
+                        <i class="fas fa-backward"></i>
+                    </a>
+                </li>
+            }
+
+            @if (Model.totalPages > 2)
+            {
+                @if (Model.currentPage != Model.totalPages && Model.currentPage != 1)
+                {
+                    <li class="page-item">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage - 1)" class="page-link">
+                            @Model.GetPreviousPage()
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage)" class="page-link">
+                            @Model.currentPage.ToString()
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage + 1)" class="page-link">
+                            @Model.GetNextPage()
+                        </a>
+                    </li>
+                }
+
+                @if (Model.currentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage)" class="page-link">
+                            1
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage + 1)" class="page-link">
+                            2
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage + 2)" class="page-link">
+                            3
+                        </a>
+                    </li>
+                }
+
+                @if (Model.currentPage == Model.totalPages)
+                {
+                    <li class="page-item btn-primary">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage - 2)" class="page-link">
+                            @Model.GetSecondPreviousPage()
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage - 1)" class="page-link">
+                            @Model.GetFisrtPreviousPage()
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage )" class="page-link">
+                            @Model.totalPages
+                        </a>
+                    </li>
+                }
+            }
+
+            @if (Model.nextPage == true)
+            {
+                <li class="page-item">
+                    <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage + 1)" class="page-link">
+                        <i class="fas fa-forward"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-pageNumber="@(Model.currentPage + 1)" class="page-link">
+                        <i class="fas fa-forward"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div> 

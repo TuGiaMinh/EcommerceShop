@@ -21,9 +21,11 @@ namespace EcommerceShop.Backend.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<ProductVm>>> GetProducts()
+        [Route("pageSize={pageSize}&pageNumber={pageNumber}")]
+        public async Task<ActionResult<IEnumerable<ProductVm>>> GetProducts(int? pageSize,int pageNumber)
         {
-            var products = await _productService.GetProducts();
+            var pagerequest = new PagingRequestVm { pageNumber = pageNumber, pageSize = pageSize };
+            var products = await _productService.GetProducts(pagerequest);
             return Ok(products);
         }
         [HttpGet("RelateProductId")]

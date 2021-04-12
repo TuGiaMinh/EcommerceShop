@@ -6,7 +6,7 @@ namespace EcommerceShop.CustomerSite.Service
 {
     public interface IProductClient
     {
-        Task<IList<ProductVm>> GetProducts();
+        Task<ProductPaginationVm> GetProducts(int pageNumber, int pageSize);
         Task<ProductVm> GetProduct(int ProductId);
         Task<IList<ProductVm>> GetProductByCategoryId(int CategoryId);
         Task<IList<ProductVm>> GetProductByBrandId(int BrandId);

@@ -39,13 +39,13 @@ namespace EcommerceShop.CustomerSite.Service
 
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
-        public async Task<IList<ProductVm>> GetProducts()
+        public async Task<ProductPaginationVm> GetProducts(int pageNumber, int pageSize)
         {
-            var response = await _client.GetAsync("api/products");
+            var response = await _client.GetAsync($"api/products/pageSize={pageSize}&pageNumber={pageNumber}");
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+            return await response.Content.ReadAsAsync<ProductPaginationVm>();
         }
 
         public async Task<IList<ProductVm>> GetRelatedProducts(int ProductId, int CategoryId)
