@@ -28,6 +28,15 @@ namespace EcommerceShop.Backend.Controllers
             var products = await _productService.GetProducts(pagerequest);
             return Ok(products);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<ProductVm>>> SearchProducts(string? keyword, int? categoryId, int? brandId, int? pageSize, int pageNumber)
+        {
+            var pagerequest = new PagingRequestVm { pageNumber = pageNumber, pageSize = pageSize };
+            var products = await _productService.SearchProducts(keyword,categoryId,brandId,pagerequest);
+            return Ok(products);
+        }
         [HttpGet("RelateProductId")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductVm>>> GetRelatedProducts(int RelateProductId, int CategoryId)

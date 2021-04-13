@@ -27,34 +27,39 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="product_sidebar">
-                    <div class="single_sedebar">
-                        <form action="#">
-                            <input type="text" name="#" placeholder="Search keyword">
-                            <i class="ti-search"></i>
-                        </form>
-                    </div>
-                    <div class="single_sedebar">
-                        <div class="select_option">
-                            <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
-                            <div class="select_option_dropdown">
-                                <p><a href="#">Category 1</a></p>
-                                <p><a href="#">Category 2</a></p>
-                                <p><a href="#">Category 3</a></p>
-                                <p><a href="#">Category 4</a></p>
+                    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                    {
+                        <div class="single_sedebar">
+                                <input type="text" name="keyword" placeholder="Search keyword">
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <fieldset>
+                                    <select name="categoryId" id="categoryId">
+                                        <option value="null"> The Loai</option>
+                                        @foreach (var item in ViewBag.categoryName)
+                                        {
+                                            <option value="@item.CategoryId">@item.Name</option>
+                                        }
+                                    </select>
+                                </fieldset>
                             </div>
                         </div>
-                    </div>
-                    <div class="single_sedebar">
-                        <div class="select_option">
-                            <div class="select_option_list">Type <i class="right fas fa-caret-down"></i> </div>
-                            <div class="select_option_dropdown">
-                                <p><a href="#">Type 1</a></p>
-                                <p><a href="#">Type 2</a></p>
-                                <p><a href="#">Type 3</a></p>
-                                <p><a href="#">Type 4</a></p>
-                            </div>
+                        <div class="single_sedebar">
+                            <fieldset>
+                                <select name="brandId" id="brandId">
+                                    <option value="null"> Thuong hieu</option>
+                                    @foreach (var item in ViewBag.brandName)
+                                    {
+                                        <option value="@item.BrandId">@item.Name</option>
+                                    }
+                                </select>
+                            </fieldset>
                         </div>
-                    </div>
+                        <div>
+                            <button class="btn btn-info f-right" style="padding:20px;">Tim kiem</button>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="col-md-8">

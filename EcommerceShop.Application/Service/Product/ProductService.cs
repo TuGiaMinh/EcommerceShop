@@ -252,6 +252,118 @@ namespace EcommerceShop.Application.Service.Product
             };
             return result;
         }
+        public async Task<ProductPaginationVm> SearchProducts(string? keyword, int? categoryId, int? brandId, PagingRequestVm pagingRequestVm)
+        {
+            var products = _context.Products.Select(x => new ProductVm
+            {
+                ProductId = x.ProductId,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                Amount = x.Amount,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(keyword) && categoryId==null && brandId==null)
+            {
+                products = _context.Products.Select(x => new ProductVm
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Price = x.Price,
+                    Amount = x.Amount,
+                    BrandId = x.BrandId,
+                    CategoryId = x.CategoryId
+                }).Where(x=>x.Name.Contains(keyword)).AsQueryable();
+            }
+            else if(!string.IsNullOrWhiteSpace(keyword) && categoryId != null && brandId == null)
+            {
+                products = _context.Products.Select(x => new ProductVm
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Price = x.Price,
+                    Amount = x.Amount,
+                    BrandId = x.BrandId,
+                    CategoryId = x.CategoryId
+                }).Where(x => x.Name.Contains(keyword)&&x.CategoryId==categoryId).AsQueryable();
+            }
+            else if (!string.IsNullOrWhiteSpace(keyword) && categoryId == null && brandId != null)
+            {
+                products = _context.Products.Select(x => new ProductVm
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Price = x.Price,
+                    Amount = x.Amount,
+                    BrandId = x.BrandId,
+                    CategoryId = x.CategoryId
+                }).Where(x => x.Name.Contains(keyword) && x.BrandId == brandId).AsQueryable();
+            }
+            else if (!string.IsNullOrWhiteSpace(keyword) && categoryId != null && brandId != null)
+            {
+                products = _context.Products.Select(x => new ProductVm
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Price = x.Price,
+                    Amount = x.Amount,
+                    BrandId = x.BrandId,
+                    CategoryId = x.CategoryId
+                }).Where(x => x.Name.Contains(keyword) && categoryId != null && x.BrandId == brandId).AsQueryable();
+            }
+            int count = products.Count();
+
+            int CurrentPage = pagingRequestVm.pageNumber;
+
+            int? PageSize = pagingRequestVm.pageSize;
+
+            int TotalCount = count;
+
+            int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
+            var items = await products.Skip((CurrentPage - 1) * PageSize.Value).Take(PageSize.Value).ToListAsync();
+            foreach (ProductVm product in items)
+            {
+                var listImageVm = await _context.Images.Select(x => new ImageVm
+                {
+                    ImageId = x.ImageId,
+                    ImageUrl = x.ImageUrl,
+                    Caption = x.Caption,
+                    IsDefault = x.IsDefault,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Images = listImageVm;
+                product.Ratings = new List<RatingVm>();
+                var listRate = await _context.Ratings.Select(x => new RatingVm
+                {
+                    RatingId = x.RatingId,
+                    RateValue = x.RateValue,
+                    FeedBack = x.FeedBack,
+                    UserId = x.UserId,
+                    ProductId = x.ProductId
+                }).Where(x => x.ProductId == product.ProductId).ToListAsync();
+                product.Ratings = listRate;
+            }
+            var previousPage = CurrentPage > 1;
+
+            var nextPage = CurrentPage < TotalPages;
+            ProductPaginationVm result = new ProductPaginationVm
+            {
+                items = items,
+                totalCount = TotalCount,
+                pageSize = PageSize.Value,
+                currentPage = CurrentPage,
+                totalPages = TotalPages,
+                previousPage = previousPage,
+                nextPage = nextPage
+            };
+            return result;
+        }
 
         public async Task<ProductVm> PostProduct(ProductCreateRequest request)
         {

@@ -13061,3 +13061,11 @@ input:focus {
     padding-top: 10px;
     padding-bottom: 20px;
 }
+.nice-select {
+    width: 100%;
+    background-color: #F4EDF2;
+    border-radius: 50px;
+}
+.list{
+    width: 100%;
+}

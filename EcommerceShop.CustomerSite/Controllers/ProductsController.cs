@@ -23,9 +23,13 @@ namespace EcommerceShop.CustomerSite.Controllers
             _categoryClient = categoryClient;
             _brandClient = brandClient;
         }
-        public async Task<IActionResult> Index(int pageNumber=1,int pageSize=4)
+        public async Task<IActionResult> Index(int? categoryId, int? brandId,int pageNumber=1,int pageSize=4, string keyword = null)
         {
-            var products =await _productClient.GetProducts(pageNumber, pageSize);
+            var products =await _productClient.SearchProducts(keyword,categoryId,brandId,pageNumber, pageSize);
+            var categoryName = await _categoryClient.GetCategories();
+            ViewBag.categoryName = categoryName;
+            var brandName = await _brandClient.GetBrands();
+            ViewBag.brandName = brandName;
             return View(products);
         }
         public async Task<IActionResult> Detail(int id)
@@ -33,7 +37,8 @@ namespace EcommerceShop.CustomerSite.Controllers
             var product = await _productClient.GetProduct(id);
             var categoryName = await _categoryClient.GetNameById(product.CategoryId);
             ViewBag.categoryName = categoryName;
-            
+            var brandName = await _brandClient.GetNameById(product.BrandId);
+            ViewBag.brandName = brandName;
             return View(product);
         }
         public async Task<IActionResult> GetProductByCategoryId(int id)
