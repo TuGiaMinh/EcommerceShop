@@ -34,7 +34,7 @@ namespace EcommerceShop.Backend.Tests
             Assert.Equal("Test brand", returnValue.Name);
         }
         [Fact]
-        public async Task Update_Success()
+        public async Task UpdateBrand_Success()
         {
             var dbContext = _fixture.Context;
             Brand oldBrand = new Brand { Name = "Test brand" };
@@ -62,7 +62,7 @@ namespace EcommerceShop.Backend.Tests
             Assert.NotEmpty(actionResult.Value as IEnumerable<BrandVm>);
         }
         [Fact]
-        public async Task Delete_Success()
+        public async Task DeleteBrand_Success()
         {
 
             var dbContext = _fixture.Context;

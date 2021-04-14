@@ -38,7 +38,7 @@ namespace EcommerceShop.Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutCategory(int id, CategoryUpdateRequest request)
+        public async Task<ActionResult<CategoryVm>> PutCategory(int id, CategoryUpdateRequest request)
         {
             var category = await _categoryService.PutCategory(id, request);
             if (category > 0)
@@ -58,7 +58,7 @@ namespace EcommerceShop.Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        public async Task<ActionResult<CategoryVm>> DeleteCategory(int id)
         {
             await _categoryService.DeleteCategory(id);
             return NoContent();
