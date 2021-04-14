@@ -42,7 +42,7 @@ namespace EcommerceShop.Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutBrand(int id, BrandUpdateRequest brandUpdateRequest)
+        public async Task<ActionResult<BrandUpdateRequest>> PutBrand(int id, BrandUpdateRequest brandUpdateRequest)
         {
             var brand = await _brandService.PutBrand(id, brandUpdateRequest);
             if (brand > 0)
@@ -62,7 +62,7 @@ namespace EcommerceShop.Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteBrand(int id)
+        public async Task<ActionResult<BrandVm>> DeleteBrand(int id)
         {
             await _brandService.DeleteBrand(id);
             return NoContent();
