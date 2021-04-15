@@ -384,7 +384,7 @@ namespace EcommerceShop.Application.Service.Product
                     product.Images.Add(new Image()
                     {
                         Caption = "Thumbnail image",
-                        ImageUrl = await this.SaveFile(file),
+                        ImageUrl = await _storageService.SaveFile(file),
                         IsDefault = false,
                     });
                 }
@@ -440,7 +440,7 @@ namespace EcommerceShop.Application.Service.Product
                     product.Images.Add(new Image()
                     {
                         Caption = "Thumbnail image",
-                        ImageUrl = await this.SaveFile(file),
+                        ImageUrl = await _storageService.SaveFile(file),
                         IsDefault = false,
                     });
                 }
@@ -477,13 +477,5 @@ namespace EcommerceShop.Application.Service.Product
             };
             return productVm;
         }
-        private async Task<string> SaveFile(IFormFile file)
-        {
-            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
-        }
-
     }
 }

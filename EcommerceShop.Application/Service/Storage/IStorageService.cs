@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace EcommerceShop.Application.Service.Storage
         Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
 
         Task DeleteFileAsync(string fileName);
+        Task<string> SaveFile(IFormFile file);
     }
 }
