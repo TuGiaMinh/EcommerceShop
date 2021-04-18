@@ -55,6 +55,23 @@ namespace EcommerceShop.Backend.IdentityServer
                         "rookieshop.api"
                     }
                 },
+                new Client
+                    {
+                        ClientId = "react",
+                        ClientSecrets = { new Secret("secret".Sha256()) },
+
+                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+
+                        AllowedScopes = new List<string>
+                        {
+                            IdentityServerConstants.StandardScopes.OpenId,
+                            IdentityServerConstants.StandardScopes.Profile,
+                            "rookieshop.api"
+                        },
+
+                        // AccessTokenLifetime = 90,
+                        AllowOfflineAccess = true,
+                },
                  new Client
                 {
                     ClientId = "swagger",

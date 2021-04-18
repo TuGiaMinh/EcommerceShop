@@ -82,6 +82,13 @@ namespace EcommerceShop.Backend
             });
             
             services.AddControllersWithViews();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rookie Shop API", Version = "v1" });
@@ -131,7 +138,7 @@ namespace EcommerceShop.Backend
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
-
+            app.UseCors("AllowAnyOrigin");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
