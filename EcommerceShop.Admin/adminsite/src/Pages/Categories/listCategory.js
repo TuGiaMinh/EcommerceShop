@@ -9,7 +9,7 @@ export default function ListCategory(
       }
 ) {
   return (
-    <>
+    <div>
       {!datas && (
         <p className="pt-5 text-center text-uppercase text-secondary">
           No data
@@ -46,6 +46,6 @@ export default function ListCategory(
           </tbody>
         </Table>
       )}
-    </>
+    </div>
   );
 }
