@@ -12,7 +12,7 @@ import NotMatch from "./Pages/Errors/error";
 export default function Routes(props) {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/home">
         <Dashboard />
       </Route>
       

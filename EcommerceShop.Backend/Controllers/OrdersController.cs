@@ -1,4 +1,5 @@
-﻿using EcommerceShop.Application.Service.Order;
+﻿using EcommerceShop.Application.Models;
+using EcommerceShop.Application.Service.Order;
 using EcommerceShop.Application.Service.OrderDetail;
 using EcommerceShop.Shared.Order;
 using EcommerceShop.Shared.OrderDetail;
@@ -27,7 +28,6 @@ namespace EcommerceShop.Backend.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(IList<CartItem> items)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -46,7 +46,7 @@ namespace EcommerceShop.Backend.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetOrdersByUserId()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByUserId()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
             string userId = claimsIdentity.Claims.ToList().ElementAt(5).Value;

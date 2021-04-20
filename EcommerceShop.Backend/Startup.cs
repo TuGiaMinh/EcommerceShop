@@ -22,6 +22,7 @@ using EcommerceShop.Application.Service.Storage;
 using EcommerceShop.Application.Service.Rating;
 using EcommerceShop.Application.Service.OrderDetail;
 using EcommerceShop.Application.Service.Order;
+using EcommerceShop.Application.Service.User;
 
 namespace EcommerceShop.Backend
 {
@@ -37,6 +38,13 @@ namespace EcommerceShop.Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -51,6 +59,7 @@ namespace EcommerceShop.Backend
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderDetailService, OrderDetailService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddIdentityServer(options =>
             {
@@ -82,13 +91,7 @@ namespace EcommerceShop.Backend
             });
             
             services.AddControllersWithViews();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAnyOrigin", builder => builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
+           
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rookie Shop API", Version = "v1" });
@@ -136,9 +139,9 @@ namespace EcommerceShop.Backend
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("AllowAnyOrigin");
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.UseCors("AllowAnyOrigin");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

@@ -42,8 +42,7 @@ namespace EcommerceShop.Backend.Controllers
             return Ok(ratings);
         }
         [HttpPost]
-        [Authorize]
-        public async Task<ActionResult<RatingCreateRequest>> PostRating(RatingCreateRequest request)
+        public async Task<ActionResult<RatingVm>> PostRating(RatingCreateRequest request)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
             string userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
