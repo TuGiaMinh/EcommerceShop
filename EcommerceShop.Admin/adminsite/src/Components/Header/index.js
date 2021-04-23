@@ -19,7 +19,7 @@ export default function Header(props) {
         <img width="40" src="./logo192.png" alt="" />
       </div>
       <div className="float-right">
-          <span className="p-5">Hello {info.userName}</span> 
+          <span className="p-5">Hello {info.userName ? info.userName : ""}</span> 
         <Button color="danger" onClick={() => handleClick()}>
         Sign Out
       </Button>

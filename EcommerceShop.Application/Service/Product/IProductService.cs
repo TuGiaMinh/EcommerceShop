@@ -12,6 +12,7 @@ namespace EcommerceShop.Application.Service.Product
     {
         Task<ProductVm> GetProductById(int ProductId);
         Task<ProductPaginationVm> GetProducts(PagingRequestVm pagingRequestVm);
+        Task<IEnumerable<EcommerceShop.Application.Models.Product>> GetAllProducts();
         Task<ProductPaginationVm> SearchProducts(string? keyword,int? categoryId,int? brandId,PagingRequestVm pagingRequestVm);
         Task<IEnumerable<ProductVm>> GetRelatedProducts(int ProductId, int CategoryId);
         Task<IEnumerable<ProductVm>> GetProductByBrandId(int BrandId);

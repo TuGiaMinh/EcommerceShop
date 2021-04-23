@@ -28,9 +28,6 @@ export default function Routes(props) {
       <Route path="/brands">
         <Brand />
       </Route>
-      <Route path="/orders">
-        <Order />
-      </Route>
       <Route path="*">
         <NotMatch />
       </Route>

@@ -1,5 +1,6 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace EcommerceShop.Backend.IdentityServer
 {
-    public static class IdentityServerConfig
+    public class IdentityServerConfig
     {
+
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
@@ -21,9 +23,8 @@ namespace EcommerceShop.Backend.IdentityServer
              {
                   new ApiScope("rookieshop.api", "Rookie Shop API")
              };
-
-        public static IEnumerable<Client> Clients =>
-            new List<Client>
+        public static IEnumerable<Client> GetClients(IConfiguration configuration) {
+           return new List<Client>
             {
                 // machine to machine client
                 new Client
@@ -44,9 +45,9 @@ namespace EcommerceShop.Backend.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44329/signin-oidc" },
+                    RedirectUris = { configuration["IdentityServerConfig:Clients:MVC:RedirectUris"] },
 
-                    PostLogoutRedirectUris = { "https://localhost:44329/signout-callback-oidc" },
+                    PostLogoutRedirectUris = {configuration["IdentityServerConfig:Clients:MVC:PostLogoutRedirectUris"] },
 
                     AllowedScopes = new List<string>
                     {
@@ -81,9 +82,9 @@ namespace EcommerceShop.Backend.IdentityServer
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    RedirectUris =           { $"https://localhost:44301/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { $"https://localhost:44301/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { $"https://localhost:44301" },
+                    RedirectUris =           { configuration["IdentityServerConfig:Clients:Swagger:RedirectUris"] },
+                    PostLogoutRedirectUris = {  configuration["IdentityServerConfig:Clients:Swagger:PostLogoutRedirectUris"] },
+                    AllowedCorsOrigins =     {  configuration["IdentityServerConfig:Clients:Swagger:AllowedCorsOrigins"] },
 
                     AllowedScopes = new List<string>
                     {
@@ -93,5 +94,7 @@ namespace EcommerceShop.Backend.IdentityServer
                     }
                 }
             };
+        }
+           
     }
 }

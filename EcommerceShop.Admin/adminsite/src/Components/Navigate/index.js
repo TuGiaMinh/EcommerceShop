@@ -14,13 +14,6 @@ export default function Navigate() {
         </NavItem>
         <NavItem>
           <NavLink>
-            <Link className="text-decoration-none" to="/orders">
-              Orders
-            </Link>
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink>
             <Link className="text-decoration-none" to="/products">
               Products
             </Link>

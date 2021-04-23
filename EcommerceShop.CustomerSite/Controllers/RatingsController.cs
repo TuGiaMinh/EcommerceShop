@@ -25,7 +25,6 @@ namespace EcommerceShop.CustomerSite.Controllers
         }
 
         [HttpPost]
- 
         public async Task<IActionResult> Create(RatingCreateRequest rating)
         {
             await _ratingClient.CreateRating(rating);

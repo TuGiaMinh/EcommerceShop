@@ -80,7 +80,7 @@ namespace EcommerceShop.Application.Service.Rating
             var result = await _context.Ratings.Where(r => r.UserId == request.UserId && r.ProductId == request.ProductId).FirstOrDefaultAsync();
             if (result != null)
             {
-                throw new Exception("Cannot Create Rating");
+                return new RatingVm();
             }
             else
             {

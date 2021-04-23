@@ -48,6 +48,10 @@ namespace EcommerceShop.Backend.Controllers
             string userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             request.UserId = userId;
             var rating = await _ratingService.PostRating(request);
+            if (rating.RatingId == 0)
+            {
+                return NoContent();
+            }
             return Ok(rating);
         }
         [HttpDelete("RatingId")]

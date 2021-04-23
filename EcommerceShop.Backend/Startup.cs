@@ -71,7 +71,7 @@ namespace EcommerceShop.Backend
             })
             .AddInMemoryIdentityResources(IdentityServerConfig.IdentityResources)
             .AddInMemoryApiScopes(IdentityServerConfig.ApiScopes)
-            .AddInMemoryClients(IdentityServerConfig.Clients)
+            .AddInMemoryClients(IdentityServerConfig.GetClients(Configuration))
             .AddAspNetIdentity<User>()
             .AddProfileService<CustomProfileService>()
             .AddDeveloperSigningCredential();

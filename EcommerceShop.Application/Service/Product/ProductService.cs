@@ -477,5 +477,11 @@ namespace EcommerceShop.Application.Service.Product
             };
             return productVm;
         }
+
+        public async Task<IEnumerable<Models.Product>> GetAllProducts()
+        {
+            var products = await _context.Products.Include(p => p.Images).Include(p => p.Category).Include(p => p.Brand).ToListAsync();
+            return products;
+        }
     }
 }

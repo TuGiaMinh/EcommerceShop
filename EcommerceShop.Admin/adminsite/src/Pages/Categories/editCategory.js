@@ -8,7 +8,6 @@ export default function EditCategory({ itemEdit, onSave, onCancel }) {
   React.useEffect(() => {
     setInputName(itemEdit?.name);
   }, [itemEdit]);
-
   const handleChangeName = (e) => setInputName(e.target.value);
   //
   const handleSubmit = () => {
