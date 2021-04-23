@@ -36,5 +36,12 @@ namespace EcommerceShop.Backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("GetAllUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> getAllUser()
+        {
+            var user = await _userService.getAllUser();
+            return Ok(user);
+        }
     }
 }

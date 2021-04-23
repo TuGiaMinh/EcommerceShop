@@ -14,15 +14,12 @@ export default function Product() {
       setListProduct(res.data);
     });
   };
-  const handleCreate = () => setSelected({ Name: "", Category:"",Brand:"",Price:"",amount:0,Description:""});
+  const handleCreate = () => setSelected({ Name: "", Category:"",Brand:"",Price:0,amount:0,Description:""});
   const handleCancel = () => setSelected(null);
   const handleEdit = (item) => {
     setSelected(item);
   };
   const handleSave = (data) => {
-    for(var pair of data.entries()) {
-      console.log(pair[0]+ ', '+ pair[1]);
-   }
     let result = window.confirm("Save the changed items?");
     if (result) {
       if (!itemSelected.productId) {

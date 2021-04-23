@@ -10,5 +10,6 @@ namespace EcommerceShop.Application.Service.User
     public interface IUserService
     {
         Task<UserInfo> getUserInfo(string userId);
+        Task<IEnumerable<UserInfo>> getAllUser();
     }
 }

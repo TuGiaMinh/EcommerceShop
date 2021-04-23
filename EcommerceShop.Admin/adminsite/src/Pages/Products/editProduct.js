@@ -7,19 +7,17 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
     const itemId = itemEdit?.productId ?? 0;
     const [listCategory, setCategory] = React.useState([]);
     const [listBrand, setBrand] = React.useState([]);
-    //const [input, setInputName] = React.useState({ Name: "", Category: 1, Brand: 1, Price: "", Amount: "", Description: ""});
     const [input, setInputName] = React.useState(
         {
             Name: "",
             CategoryId: 1,
             BrandId: 1,
-            Price: "",
-            Amount: "",
+            Price: 0,
+            Amount: 0,
             Description: "",
             
         });
     const [files, setFiles] = React.useState([]);
-
     React.useEffect(() => {
         cateService.getList().then((resp) => {
             setCategory(resp.data);
@@ -27,19 +25,15 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         brandService.getList().then((resp) => {
             setBrand(resp.data);
         });
+        setInputName({
+            Name: itemEdit?.name,
+            CategoryId: itemEdit?.categoryId,
+            BrandId: itemEdit?.brandId,
+            Price: itemEdit?.price,
+            Amount: itemEdit?.amount,
+            Description: itemEdit?.description,
+        })
     }, [itemEdit]);
-    React.useEffect(() => {
-        if (itemId) {
-            setInputName({
-                Name: itemEdit.name,
-                CategoryId: itemEdit.categoryId,
-                BrandId: itemEdit.brandId,
-                Price: itemEdit.price,
-                Amount: itemEdit.amount,
-                Description: itemEdit.description,
-            })
-        }
-    }, [itemEdit])
     const handleChangeProduct = (e) => {
         const value = e.target.value;
         setInputName({
@@ -57,9 +51,6 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
     };
     const ProductFormData = (product, listImage) => {
         let myFormData = new FormData();
-        // if (product?.productId) {
-        //     myFormData.append("productId", product?.productId);
-        // }
         myFormData.append("name", product?.Name);
         myFormData.append("price", product?.Price);
         myFormData.append("amount", product?.Amount);
@@ -79,6 +70,7 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
 
         if (input && files) {
             onSave(ProductFormData(input, files));
+            setFiles([]);
         }
         else window.alert("Please fill the form below");
     };
