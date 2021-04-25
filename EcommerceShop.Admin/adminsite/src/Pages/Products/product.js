@@ -1,50 +1,65 @@
 import React, { useState } from "react";
 import { Button,Row,Col } from "reactstrap";
-import productService from "../../Services/productService";
+import ProductService from "../../Services/productService";
 import ListProduct from "../Products/listProduct";
 import EditProduct from "../Products/editProduct";
+import { history } from '../../Helpers/History';
 export default function Product() {
+
+  const token = localStorage.getItem("token");
+  const info = JSON.parse(localStorage.getItem("info"));
+
+  if(!token && !info){
+      history.push('/');
+  }
+
   const [listProduct, setListProduct] = useState([]);
+
   const [itemSelected, setSelected] = useState(null);
+
   React.useEffect(() => {
-    handleChange();
+    handleGetProducts();
   }, []);
-  const handleChange = () => {
-    productService.getList().then((res) => {
+
+  const handleGetProducts = () => {
+    ProductService.getList().then((res) => {
       setListProduct(res.data);
     });
   };
+
   const handleCreate = () => setSelected({ Name: "", Category:"",Brand:"",Price:0,amount:0,Description:""});
-  const handleCancel = () => setSelected(null);
-  const handleEdit = (item) => {
-    setSelected(item);
-  };
+
+  const handleEdit = (item) => { setSelected(item) };
+
   const handleSave = (data) => {
     let result = window.confirm("Save the changed items?");
     if (result) {
       if (!itemSelected.productId) {
-        productService.create(data).then((reps) => {
-          handleChange();
+       
+        ProductService.create(data).then(() => {
+          handleGetProducts();
         });
       } 
       else {
-        productService.edit(itemSelected.productId, data).then((reps) => {
-          handleChange();
+        ProductService.edit(itemSelected.productId, data).then(() => {
+          handleGetProducts();
         });
       }
       setSelected(null);
     }
   };
+
   const handleDelete = (itemId) => {
     let result = window.confirm("Delete this item?");
     if (result) {
-      productService.delete(itemId).then((resp) => {
-        setListProduct(_removeViewItem(listProduct, itemId));
+      ProductService.delete(itemId).then(() => {
+        handleGetProducts();
       });
     }
   };
-  const _removeViewItem = (lists, itemDel) =>
-  lists.filter((item) => item.productId !== itemDel);
+
+  const handleCancel = () => setSelected(null);
+
   return (
     <div>
         <Button
@@ -59,10 +74,10 @@ export default function Product() {
         onSave={handleSave}
       />
       <ListProduct
-        datas={listProduct}
+        data={listProduct}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onChange={handleChange}
+        onChange={handleGetProducts}
       />
       
     </div>

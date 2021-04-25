@@ -5,5 +5,5 @@ export default function Dashboard(props) {
   if(!token && !info){
       history.push('/');
   }
-    return <p> OverviewPage </p>;
+    return <p> Hello Admin!!! </p>;
   }

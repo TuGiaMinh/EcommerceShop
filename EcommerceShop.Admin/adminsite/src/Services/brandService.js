@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { host, Brands } from '../config';
-class brandService {
+class BrandService {
+    getToken(){
+        const token = localStorage.getItem("token");
+    }
     getList() {
         return axios({
             url: host + "/api/" + Brands, 
@@ -17,6 +20,7 @@ class brandService {
         });
     }
     delete(id) {
+        
         return axios({
             url: host + "/api/" + Brands + "/" + id,
             method: "delete",
@@ -32,4 +36,4 @@ class brandService {
         });
     }
 }
-export default new brandService();
+export default new BrandService();

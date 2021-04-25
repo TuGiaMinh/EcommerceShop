@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Table } from "reactstrap";
-export default function ListBrand({ datas, onEdit, onDelete, })
+export default function ListBrand({ data, onEdit, onDelete, })
 {
     return (
         <div>
-            {!datas &&(
+            {!data &&(
               <p className="pt-5.text-center.text-uppercase.text-secondary">No data</p> 
             )}
             {
-                datas &&(
+                data &&(
                     <Table>
                         <thead>
                             <tr>
@@ -19,7 +19,7 @@ export default function ListBrand({ datas, onEdit, onDelete, })
                         </thead>
                         <tbody>
                             {
-                                datas.map((item,index)=>(
+                                data.map((item,index)=>(
                                     <tr key={+index}>
                                         <td scope="row">{index+1}</td>
                                         <td>{item.name}</td>

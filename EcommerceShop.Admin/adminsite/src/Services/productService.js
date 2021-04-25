@@ -1,6 +1,6 @@
 import axios from "axios";
 import { host ,Products} from "../config";
-class productService {
+class ProductService {
   getList() {
     return axios({
       url: host + "/api/" + Products+"/"+"getAllProduct", 
@@ -35,4 +35,4 @@ class productService {
 
 }
 
-export default new productService();
+export default new ProductService();

@@ -7,7 +7,6 @@ export default function Header(props) {
   const token = localStorage.getItem("token");
   const info = JSON.parse(localStorage.getItem("info"));
   const handleClick = ()=>{
-    console.log('as');
     localStorage.removeItem("token");
     localStorage.removeItem("info");
 
@@ -19,7 +18,7 @@ export default function Header(props) {
         <img width="40" src="./logo192.png" alt="" />
       </div>
       <div className="float-right">
-          <span className="p-5">Hello {info.userName ? info.userName : ""}</span> 
+          <span className="p-5">Hello {info?.userName ? info.userName : ""}</span> 
         <Button color="danger" onClick={() => handleClick()}>
         Sign Out
       </Button>

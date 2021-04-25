@@ -4,10 +4,31 @@ import brandService from "../../Services/brandService";
 import cateService from "../../Services/categoryService";
 
 export default function EditProduct({ itemEdit, onSave, onCancel }) {
+
     const itemId = itemEdit?.productId ?? 0;
+
+    React.useEffect(() => {
+        cateService.getList().then((res) => {
+            setCategory(res.data);
+        });
+        brandService.getList().then((res) => {
+            setBrand(res.data);
+        });
+        setInput({
+            Name: itemEdit?.name,
+            CategoryId: itemEdit?.categoryId,
+            BrandId: itemEdit?.brandId,
+            Price: itemEdit?.price,
+            Amount: itemEdit?.amount,
+            Description: itemEdit?.description,
+        })
+    }, [itemEdit]);
+
     const [listCategory, setCategory] = React.useState([]);
+
     const [listBrand, setBrand] = React.useState([]);
-    const [input, setInputName] = React.useState(
+
+    const [input, setInput] = React.useState(
         {
             Name: "",
             CategoryId: 1,
@@ -17,26 +38,12 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
             Description: "",
             
         });
+
     const [files, setFiles] = React.useState([]);
-    React.useEffect(() => {
-        cateService.getList().then((resp) => {
-            setCategory(resp.data);
-        });
-        brandService.getList().then((resp) => {
-            setBrand(resp.data);
-        });
-        setInputName({
-            Name: itemEdit?.name,
-            CategoryId: itemEdit?.categoryId,
-            BrandId: itemEdit?.brandId,
-            Price: itemEdit?.price,
-            Amount: itemEdit?.amount,
-            Description: itemEdit?.description,
-        })
-    }, [itemEdit]);
+
     const handleChangeProduct = (e) => {
         const value = e.target.value;
-        setInputName({
+        setInput({
             ...input,
             [e.target.name]: value,
         });
@@ -49,16 +56,15 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
             setFiles(images);
         }
     };
+
     const ProductFormData = (product, listImage) => {
         let myFormData = new FormData();
         myFormData.append("name", product?.Name);
         myFormData.append("price", product?.Price);
         myFormData.append("amount", product?.Amount);
         myFormData.append("description", product?.Description);
-        // myFormData.append("categoryId", product?.Category);
-        myFormData.append("categoryId",1);
-        // myFormData.append("brandId", product?.Brand);
-        myFormData.append("brandId", 1);
+        myFormData.append("categoryId",product?.CategoryId);
+        myFormData.append("brandId", product?.BrandId);
         if (listImage) {
             [...listImage].forEach((file) => {
                 myFormData.append("images", file);
@@ -66,6 +72,7 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         }
         return myFormData;
     };
+
     const handleSubmit = () => {
 
         if (input && files) {
@@ -74,17 +81,19 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         }
         else window.alert("Please fill the form below");
     };
-    //
-    const RenderListCategory = () => {
+    
+    const itemsCategory = () => {
         return listCategory?.map((item) => {
             return <option value={item.categoryId} selected={item.categoryId === itemEdit.category?.categoryId ? true : false}>{item.name}</option>;
         });
     }
-    const RenderListBrand = () => {
+
+    const itemsBrand = () => {
         return listBrand?.map((item) => {
             return <option value={item.brandId} selected={item.brandId === itemEdit.brand?.brandId ? true : false}>{item.name}</option>;
         });
     }
+
     return (
         <div>
             {!itemEdit && (
@@ -129,14 +138,14 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
                             <FormGroup>
 
                                 <Label for="Category">Category</Label>
-                                <select name="Category" onChange={handleChangeProduct} style={{
+                                <select name="CategoryId" onChange={handleChangeProduct} style={{
                                     width: "100%", height: "100%", padding: ".375rem .75rem",
                                     border: "1px solid #ced4da", backgroundClip: "padding-box", borderRadius: ".25rem",
                                     fontSize: "1rem",
                                     fontWeight: "400",
                                     lineHeight: "1.5",
                                 }}>
-                                    {RenderListCategory()}
+                                    {itemsCategory()}
                                 </select>
                             </FormGroup>
 
@@ -144,14 +153,14 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
                         <Col lg={3} className="text-center">
                             <FormGroup>
                                 <Label for="Brand">Brand</Label>
-                                <select name="Brand" onChange={handleChangeProduct} style={{
+                                <select name="BrandId" onChange={handleChangeProduct} style={{
                                     width: "100%", height: "100%", padding: ".375rem .75rem",
                                     border: "1px solid #ced4da", backgroundClip: "padding-box", borderRadius: ".25rem",
                                     fontSize: "1rem",
                                     fontWeight: "400",
                                     lineHeight: "1.5",
                                 }}>
-                                    {RenderListBrand()}
+                                    {itemsBrand()}
                                 </select>
                             </FormGroup>
 

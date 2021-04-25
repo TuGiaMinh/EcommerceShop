@@ -1,7 +1,4 @@
-import { Router,Switch,
-  Route,
-  Link,
-  Redirect } from "react-router-dom";
+import { Router,Switch} from "react-router-dom";
 import Header from "./Components/Header";
 import Navigate from "./Components/Navigate";
 import PageLayout from "./Components/PageLayout";
@@ -10,8 +7,6 @@ import {Login} from"./Pages/Users/Login";
 import { history } from './Helpers/History';
 
 function App() {
-  const token = localStorage.getItem("token");
-  const info = JSON.parse(localStorage.getItem("info"));
   return (
     <Router history={history}>
         <Switch>

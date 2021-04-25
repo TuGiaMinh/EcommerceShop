@@ -3,15 +3,19 @@ import api from'../../Utils/api';
 import { history } from '../../Helpers/History';
 
 export const Login = () => {
+
     const token = localStorage.getItem("token");
     const info = JSON.parse(localStorage.getItem("info"));
+
     if(token!==null&&info.roles==='admin'){
         history.push("/home");
     }
+
     const [input, setInput] = useState({
         username: "",
         password: ""
     });
+
     const handleChange = (e) => {
         const value = e.target.value;
         setInput({
@@ -19,11 +23,12 @@ export const Login = () => {
             [e.target.name]: value
         });
     }
+
     const {username,password}=input;
-    const handleSubmit= async (e)=>{
+
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        
-        if(username&&password){
+        if(username && password){
             var urlencoded = new URLSearchParams();
             urlencoded.append("grant_type", "password");
             urlencoded.append("username", username);
@@ -31,7 +36,6 @@ export const Login = () => {
             urlencoded.append("client_id", "react");
             urlencoded.append("client_secret", "secret");
             const result = await api.post('/connect/token',urlencoded).then(r => { return r.data });
-            
             let info = await api.get("/api/v1/Users", {headers: { Authorization: `Bearer `+result.access_token }}).then(r=>{return r.data});
             if(info.roles==="admin"){
                 localStorage.setItem("token",result.access_token);
@@ -40,6 +44,7 @@ export const Login = () => {
             }
         }
     };
+
     return (
         <Fragment>
             <form onSubmit={handleSubmit}>

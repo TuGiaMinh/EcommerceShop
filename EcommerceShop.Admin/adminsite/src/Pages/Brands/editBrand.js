@@ -2,17 +2,23 @@ import React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function EditBrand({ itemEdit, onSave, onCancel }) {
+
     const itemId = itemEdit?.brandId ?? 0;
-    const [inputName, setInputName] = React.useState("");
+
+    const [input, setInput] = React.useState("");
+
     React.useEffect(() => {
-        setInputName(itemEdit?.name);
+        setInput(itemEdit?.name);
     }, [itemEdit]);
-    const handleChangeName = (e) => setInputName(e.target.value);
+
+    const handleChangeName = (e) => setInput(e.target.value);
+
     const handleSubmit = () => {
-        if (inputName)
-            onSave({ brandId: itemId, name: inputName });
+        if (input)
+            onSave({ brandId: itemId, name: input });
         else window.alert("Please fill the form below");
     }
+
     return (
         <div>
             {
@@ -28,12 +34,12 @@ export default function EditBrand({ itemEdit, onSave, onCancel }) {
                         <FormGroup>
                             <Label for="Name">Brand Name</Label>
                             <Input
-                                invalid={!inputName}
+                                invalid={!input}
                                 type="text"
                                 name="Name"
                                 id="Name"
                                 onChange={handleChangeName}
-                                value={inputName}
+                                value={input}
                             >
                             </Input>
                         </FormGroup>

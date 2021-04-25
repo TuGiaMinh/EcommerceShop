@@ -3,19 +3,19 @@ import { Button, Table } from "reactstrap";
 
 export default function ListCategory(
     {
-        datas,
+        data,
         onEdit,
         onDelete,
       }
 ) {
   return (
     <div>
-      {!datas && (
+      {!data && (
         <p className="pt-5 text-center text-uppercase text-secondary">
           No data
         </p>
       )}
-      {datas && (
+      {data && (
         <Table>
           <thead>
             <tr>
@@ -25,7 +25,7 @@ export default function ListCategory(
             </tr>
           </thead>
           <tbody>
-            {datas.map((item, index) => (
+            {data.map((item, index) => (
               <tr key={+index}>
                 <th scope="row">{index + 1}</th>
                 <td>{item.name}</td>

@@ -1,15 +1,26 @@
 import api from'../../Utils/api';
 import React from "react";
-import { Button, Table } from "reactstrap";
-export default function User(props) {
-  const [listUser, setListProduct] = React.useState([]);
+import {  Table } from "reactstrap";
+import { history } from '../../Helpers/History';
+export default function User() {
+
+  const token = localStorage.getItem("token");
+  const info = JSON.parse(localStorage.getItem("info"));
+
+  if(!token && !info){
+      history.push('/');
+  }
+
+  const [listUser, setListUser] = React.useState([]);
+
   React.useEffect(() => {
-    handleChange();
+    handleGetUsers();
   }, []);
-  const handleChange = () => {
-     api.get("/api/v1/Users/GetAllUser").then(r=>{setListProduct(r.data)});
+
+  const handleGetUsers = () => {
+     api.get("/api/v1/Users/GetAllUser").then(r=>{setListUser(r.data)});
   };
-  console.log(listUser)
+
     return (
       <div>
          {!listUser && (

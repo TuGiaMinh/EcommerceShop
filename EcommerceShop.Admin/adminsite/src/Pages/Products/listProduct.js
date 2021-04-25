@@ -3,19 +3,19 @@ import { Button, Table } from "reactstrap";
 import { host } from "../../config";
 export default function ListProduct(
     {
-        datas,
+        data,
         onEdit,
         onDelete,
       }
 ) {
   return (
     <div>
-      {!datas && (
+      {!data && (
         <p className="pt-5 text-center text-uppercase text-secondary">
           No data
         </p>
       )}
-      {datas && (
+      {data && (
         <Table>
           <thead>
             <tr>
@@ -30,7 +30,7 @@ export default function ListProduct(
             </tr>
           </thead>
           <tbody>
-            {datas.map((item, index) => (
+            {data.map((item, index) => (
               <tr key={+index}>
                 <th scope="row">{index + 1}</th>
                 <td><img src={!item.images.length ? "" :(host +JSON.parse(JSON.stringify(item.images[0].imageUrl)))} alt={item.name} style={{width:"60px", height:"60px"}} /></td>

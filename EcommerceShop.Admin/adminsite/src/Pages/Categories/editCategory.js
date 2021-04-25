@@ -2,20 +2,23 @@ import React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function EditCategory({ itemEdit, onSave, onCancel }) {
+
   const itemId = itemEdit?.categoryId ?? 0;
-  const [inputName, setInputName] = React.useState("");
+
+  const [input, setInput] = React.useState("");
 
   React.useEffect(() => {
-    setInputName(itemEdit?.name);
+    setInput(itemEdit?.name);
   }, [itemEdit]);
-  const handleChangeName = (e) => setInputName(e.target.value);
-  //
+
+  const handleChangeInput = (e) => setInput(e.target.value);
+
   const handleSubmit = () => {
-    if (inputName)
-      onSave({ categoryId: itemId, name: inputName});
+    if (input)
+      onSave({ categoryId: itemId, name: input});
     else window.alert("Please fill the form below");
   };
-  //
+  
   return (
     <div>
       {!itemEdit && (
@@ -28,12 +31,12 @@ export default function EditCategory({ itemEdit, onSave, onCancel }) {
           <FormGroup>
             <Label for="Name">Category Name</Label>
             <Input
-              invalid={!inputName}
+              invalid={!input}
               type="text"
               name="Name"
               id="Name"
-              onChange={handleChangeName}
-              value={inputName}
+              onChange={handleChangeInput}
+              value={input}
             />
           </FormGroup>
           <div className="pt-3">

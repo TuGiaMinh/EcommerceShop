@@ -1,53 +1,65 @@
 import React from "react";
 import { Button } from "reactstrap";
-import brandService from "../../Services/brandService";
+import BrandService from "../../Services/brandService";
 import SplitLayout from "../../Components/SplitLayout";
 import ListBrand from "../Brands/listBrand";
 import EditBrand from "../Brands/editBrand";
+import { history } from '../../Helpers/History';
 
-export default function Brand(props) {
+export default function Brand() {
+
+  const token = localStorage.getItem("token");
+  const info = JSON.parse(localStorage.getItem("info"));
+
+  if(!token && !info){
+      history.push('/');
+  }
+
   const [listBrand, setBrand] = React.useState([]);
+
   const [itemSelected, setSelected] = React.useState(null);
+
   React.useEffect(() => {
-    handleChange();
+    handleGetBrands();
   }, []);
-  const handleChange = () => {
-    brandService.getList().then((res) => {
+
+  const handleGetBrands = () => {
+    BrandService.getList().then((res) => {
       setBrand(res.data);
     });
   };
+
   const handleCreate = () => setSelected({ Name: "" });
+
   const handleEdit = (item) => setSelected(item);
-  const handleCancel = () => setSelected(null);
-  const handleDelete = (itemId) => {
-    let result = window.confirm("Delete this item?");
-    if (result) {
-      brandService.delete(itemId).then((res) => {
-        setBrand(_removeViewItem(listBrand, itemId));
-      });
-    }
-  };
+
   const handleSave = (data) => {
     let result = window.confirm("Save the changed items?");
     if (result) {
       if (!data.brandId) {
-        brandService.create(data).then((res) => {
-          handleChange();
+        BrandService.create(data).then(() => {
+          handleGetBrands();
         })
       }
       else {
-        brandService.edit(data.brandId, data).then((res) => {
-          setBrand(_updateViewItem(listBrand, data));
+        BrandService.edit(data.brandId, data).then(() => {
+          handleGetBrands();
         });
       }
       setSelected(null);
     }
   };
-  const _removeViewItem = (list, itemDel) =>
-    list.filter((item) => item.brandId !== itemDel);
-  const _updateViewItem = (list, itemEdit) =>
-    list.map((item) => (item.brandId === itemEdit.brandId ? itemEdit : item));
 
+  const handleDelete = (itemId) => {
+    let result = window.confirm("Delete this item?");
+    if (result) {
+      BrandService.delete(itemId).then(() => {
+        handleGetBrands();
+      });
+    }
+  };
+  
+  const handleCancel = () => setSelected(null);
 
 
   return (
@@ -63,10 +75,10 @@ export default function Brand(props) {
       }
       right={
         <ListBrand
-          datas={listBrand}
+          data={listBrand}
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onChange={handleChange}
+          onChange={handleGetBrands}
         />
       }
       left={

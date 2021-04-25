@@ -1,6 +1,6 @@
 import axios from "axios";
 import { host ,Categories} from "../config";
-class cateService {
+class CategoryService {
   getList() {
     return axios({
       url: host + "/api/" + Categories, 
@@ -35,4 +35,4 @@ class cateService {
 
 }
 
-export default new cateService();
+export default new CategoryService();

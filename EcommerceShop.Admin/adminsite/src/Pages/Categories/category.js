@@ -1,51 +1,63 @@
 import React from "react";
 import { Button } from "reactstrap";
-import cateService from "../../Services/categoryService";
+import CategoryService from "../../Services/categoryService";
 import SplitLayout from "../../Components/SplitLayout";
 import ListCategory from "../Categories/listCategory";
 import EditCategory from "../Categories/editCategory";
+import { history } from '../../Helpers/History';
 export default function Category() {
-  const [listCategory, setCategory] = React.useState([]);
+
+  const token = localStorage.getItem("token");
+  const info = JSON.parse(localStorage.getItem("info"));
+
+  if(!token && !info){
+      history.push('/');
+  }
+
+  const [listCategory, setCategories] = React.useState([]);
+
   const [itemSelected, setSelected] = React.useState(null);
+
   React.useEffect(() => {
-    handleChangeType();
+    handleGetCategories();
   }, []);
-  const handleChangeType = () => {
-    cateService.getList().then((resp) => {
-      setCategory(resp.data);
+
+  const handleGetCategories = () => {
+    CategoryService.getList().then((res) => {
+      setCategories(res.data);
     });
   };
+
   const handleCreate = () => setSelected({ Name: ""});
+
   const handleEdit = (item) => setSelected(item);
-  const handleCancel = () => setSelected(null);
-  const handleDelete = (itemId) => {
-    let result = window.confirm("Delete this item?");
-    if (result) {
-      cateService.delete(itemId).then((resp) => {
-        setCategory(_removeViewItem(listCategory, itemId));
-      });
-    }
-  };
+  
   const handleSave = (data) => {
     let result = window.confirm("Save the changed items?");
     if (result) {
       if (!data.categoryId) {
-        cateService.create(data).then((reps) => {
-          handleChangeType();
+        CategoryService.create(data).then(() => {
+          handleGetCategories();
         });
       } else {
-        cateService.edit(data.categoryId, data).then((reps) => {
-          setCategory(_updateViewItem(listCategory, data));
+        CategoryService.edit(data.categoryId, data).then(() => {
+          handleGetCategories();
         });
       }
       setSelected(null);
     }
   };
-  const _removeViewItem = (lists, itemDel) =>
-  lists.filter((item) => item.categoryId !== itemDel);
 
-  const _updateViewItem = (lists, itemEdit) =>
-  lists.map((item) => (item.categoryId === itemEdit.categoryId ? itemEdit : item));
+  const handleDelete = (itemId) => {
+    let result = window.confirm("Delete this item?");
+    if (result) {
+      CategoryService.delete(itemId).then(() => {
+        handleGetCategories();
+      });
+    }
+  };
+
+  const handleCancel = () => setSelected(null);
 
     return (
       <SplitLayout
@@ -60,10 +72,10 @@ export default function Category() {
         }
         right={
           <ListCategory
-            datas={listCategory}
+            data={listCategory}
             onEdit={handleEdit}
             onDelete={handleDelete}
-            onChangeType={handleChangeType}
+            onChange={handleGetCategories}
           />
         }
         left={
