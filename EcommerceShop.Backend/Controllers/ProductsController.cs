@@ -25,7 +25,7 @@ namespace EcommerceShop.Backend.Controllers
         public async Task<ActionResult<IEnumerable<ProductPaginationVm>>> GetProducts(int? pageSize,int pageNumber)
         {
             var pagerequest = new PagingRequestVm { pageNumber = pageNumber, pageSize = pageSize };
-            var products = await _productService.GetProducts(pagerequest);
+            var products = await _productService.GetPagination(pagerequest);
             return Ok(products);
         }
         [HttpGet]

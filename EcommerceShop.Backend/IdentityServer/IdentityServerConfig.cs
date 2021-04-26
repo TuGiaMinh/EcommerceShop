@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceShop.Backend.IdentityServer
 {
-    public class IdentityServerConfig
+    public static class IdentityServerConfig
     {
 
         public static IEnumerable<IdentityResource> IdentityResources =>

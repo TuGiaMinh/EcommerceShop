@@ -22,7 +22,7 @@ namespace EcommerceShop.Application.Service.Category
             var category = await _context.Categories.FindAsync(CategoryId);
             if (category == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
             _context.Categories.Remove(category);
             return await _context.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace EcommerceShop.Application.Service.Category
 
             if (category == null)
             {
-                throw new Exception("Cannot find id");
+                return new CategoryVm();
             }
 
             var categoryVm = new CategoryVm
@@ -77,7 +77,7 @@ namespace EcommerceShop.Application.Service.Category
 
             if (category == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
 
             category.Name = request.Name;

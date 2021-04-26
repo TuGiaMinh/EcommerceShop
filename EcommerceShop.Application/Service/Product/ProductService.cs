@@ -21,7 +21,6 @@ namespace EcommerceShop.Application.Service.Product
     {
         private readonly ApplicationDbContext _context;
         private readonly IStorageService _storageService;
-        private const string USER_CONTENT_FOLDER_NAME = "user-content";
 
         public ProductService(ApplicationDbContext context, IStorageService storageService)
         {
@@ -33,7 +32,7 @@ namespace EcommerceShop.Application.Service.Product
             var product = await _context.Products.FindAsync(ProductId);
             if (product == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
             var images = await _context.Images.Where(i => i.ProductId == ProductId).ToListAsync();
             foreach (var image in images)
@@ -191,7 +190,7 @@ namespace EcommerceShop.Application.Service.Product
             }
             return products;
         }
-        public async Task<ProductPaginationVm> GetProducts(PagingRequestVm pagingRequestVm)
+        public async Task<ProductPaginationVm> GetPagination(PagingRequestVm pagingRequestVm)
         {
             var products =  _context.Products.Select(x => new ProductVm
             {
@@ -419,7 +418,7 @@ namespace EcommerceShop.Application.Service.Product
 
             if (product == null)
             {
-                throw new Exception("Cannot find id");
+                return new ProductVm();
             }
             product.Name = request.Name;
             product.Description = request.Description;

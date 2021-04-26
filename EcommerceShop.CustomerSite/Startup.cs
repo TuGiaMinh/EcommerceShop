@@ -39,7 +39,6 @@ namespace EcommerceShop.CustomerSite
                .AddOpenIdConnect("oidc", options =>
                {
                    options.Authority = Configuration.GetServiceUri("backend").ToString();
-                   //options.Authority = "https://localhost:44301";
                    options.RequireHttpsMetadata = false;
                    options.GetClaimsFromUserInfoEndpoint = true;
 

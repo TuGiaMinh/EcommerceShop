@@ -39,7 +39,7 @@ namespace EcommerceShop.Application.Service.User
 
         public async Task<UserInfo> getUserInfo(string userId)
         {
-            var info = await (from u in _context.Users
+            var userInfo = await (from u in _context.Users
                               join ur in _context.UserRoles on u.Id equals ur.UserId
                               join r in _context.Roles on ur.RoleId equals r.Id
                               where u.Id.Equals(userId)
@@ -54,7 +54,7 @@ namespace EcommerceShop.Application.Service.User
                                   DateofBirth = u.DateofBrith,
                                   roles = r.Name
                               }).FirstOrDefaultAsync();
-            return info;
+            return userInfo;
         }
     }
 }

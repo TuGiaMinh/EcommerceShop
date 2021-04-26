@@ -26,7 +26,7 @@ namespace EcommerceShop.Application.Brand
             var brand = await _context.Brands.FindAsync(BrandId);
             if (brand == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
             _context.Brands.Remove(brand);
             return await _context.SaveChangesAsync();
@@ -39,7 +39,7 @@ namespace EcommerceShop.Application.Brand
 
             if (brand == null)
             {
-                throw new Exception("Cannot find id");
+                return new BrandVm();
             }
 
             var brandVm = new BrandVm
@@ -83,7 +83,7 @@ namespace EcommerceShop.Application.Brand
 
             if (brand == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
 
             brand.Name = request.Name;

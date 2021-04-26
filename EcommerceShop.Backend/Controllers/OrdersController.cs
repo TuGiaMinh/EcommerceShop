@@ -39,9 +39,7 @@ namespace EcommerceShop.Backend.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteMyOrder(int OrderId)
         {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            string userId = claimsIdentity.Claims.ToList().ElementAt(5).Value;
-            await _orderService.DeleteMyOrder(OrderId);
+            await _orderService.DeleteOrder(OrderId);
             return StatusCode(201);
         }
         [HttpGet]
@@ -50,7 +48,7 @@ namespace EcommerceShop.Backend.Controllers
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
             string userId = claimsIdentity.Claims.ToList().ElementAt(5).Value;
-            var orders = await _orderService.GetMyOrderByUserId(userId);
+            var orders = await _orderService.GetOrderByUserId(userId);
             return Ok(orders);
         }
         [HttpGet("OrderId")]

@@ -23,7 +23,7 @@ namespace EcommerceShop.Application.Service.Rating
             var rating = await _context.Ratings.FindAsync(RatingId);
             if (rating == null)
             {
-                throw new Exception("Cannot find id");
+                return -1;
             }
             _context.Ratings.Remove(rating);
             return await _context.SaveChangesAsync();

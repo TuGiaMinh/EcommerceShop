@@ -11,7 +11,7 @@ namespace EcommerceShop.Application.Service.Order
     {
         Task<OrderVm> CreateAsync(IList<CartItem> items, string userId);
 
-        Task<IEnumerable<Models.Order>> GetMyOrderByUserId(string userId);
-        Task<bool> DeleteMyOrder(int orderId);
+        Task<IEnumerable<Models.Order>> GetOrderByUserId(string userId);
+        Task<bool> DeleteOrder(int orderId);
     }
 }

@@ -46,7 +46,7 @@ namespace EcommerceShop.Application.Service.Order
             return orderVm;
         }
 
-        public async Task<bool> DeleteMyOrder(int orderId)
+        public async Task<bool> DeleteOrder(int orderId)
         {
             var flag = await _orderDetailService.OrderDetailExistsAsync(orderId);
             if (flag)
@@ -59,7 +59,7 @@ namespace EcommerceShop.Application.Service.Order
             return false;
         }
 
-        public async Task<IEnumerable<Models.Order>> GetMyOrderByUserId(string userId)
+        public async Task<IEnumerable<Models.Order>> GetOrderByUserId(string userId)
         {
             var order = await _context.Orders.Include(x => x.OrderDetails).ThenInclude(od=>od.Product).Where(p => p.UserId == userId).ToListAsync();
             return order;
