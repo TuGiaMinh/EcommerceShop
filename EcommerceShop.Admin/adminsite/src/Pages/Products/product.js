@@ -3,16 +3,7 @@ import { Button,Row,Col } from "reactstrap";
 import ProductService from "../../Services/productService";
 import ListProduct from "../Products/listProduct";
 import EditProduct from "../Products/editProduct";
-import { history } from '../../Helpers/History';
 export default function Product() {
-
-  const token = localStorage.getItem("token");
-  const info = JSON.parse(localStorage.getItem("info"));
-
-  if(!token && !info){
-      history.push('/');
-  }
-
   const [listProduct, setListProduct] = useState([]);
 
   const [itemSelected, setSelected] = useState(null);

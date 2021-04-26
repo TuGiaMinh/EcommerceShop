@@ -1,15 +1,7 @@
 import api from'../../Utils/api';
 import React from "react";
 import {  Table } from "reactstrap";
-import { history } from '../../Helpers/History';
 export default function User() {
-
-  const token = localStorage.getItem("token");
-  const info = JSON.parse(localStorage.getItem("info"));
-
-  if(!token && !info){
-      history.push('/');
-  }
 
   const [listUser, setListUser] = React.useState([]);
 

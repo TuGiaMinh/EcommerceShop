@@ -4,16 +4,7 @@ import CategoryService from "../../Services/categoryService";
 import SplitLayout from "../../Components/SplitLayout";
 import ListCategory from "../Categories/listCategory";
 import EditCategory from "../Categories/editCategory";
-import { history } from '../../Helpers/History';
 export default function Category() {
-
-  const token = localStorage.getItem("token");
-  const info = JSON.parse(localStorage.getItem("info"));
-
-  if(!token && !info){
-      history.push('/');
-  }
-
   const [listCategory, setCategories] = React.useState([]);
 
   const [itemSelected, setSelected] = React.useState(null);

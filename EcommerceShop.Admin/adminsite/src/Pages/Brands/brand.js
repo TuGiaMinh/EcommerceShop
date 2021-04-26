@@ -4,16 +4,8 @@ import BrandService from "../../Services/brandService";
 import SplitLayout from "../../Components/SplitLayout";
 import ListBrand from "../Brands/listBrand";
 import EditBrand from "../Brands/editBrand";
-import { history } from '../../Helpers/History';
 
 export default function Brand() {
-
-  const token = localStorage.getItem("token");
-  const info = JSON.parse(localStorage.getItem("info"));
-
-  if(!token && !info){
-      history.push('/');
-  }
 
   const [listBrand, setBrand] = React.useState([]);
 
