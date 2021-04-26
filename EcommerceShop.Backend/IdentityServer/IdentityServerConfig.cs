@@ -23,8 +23,9 @@ namespace EcommerceShop.Backend.IdentityServer
              {
                   new ApiScope("rookieshop.api", "Rookie Shop API")
              };
-        public static IEnumerable<Client> GetClients(IConfiguration configuration) {
-           return new List<Client>
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
+        {
+            return new List<Client>
             {
                 // machine to machine client
                 new Client
@@ -61,7 +62,12 @@ namespace EcommerceShop.Backend.IdentityServer
                         ClientId = "react",
                         ClientSecrets = { new Secret("secret".Sha256()) },
 
-                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                        AllowedGrantTypes = GrantTypes.Implicit,
+                        RequireClientSecret = false,
+                        RedirectUris = { configuration["IdentityServerConfig:Clients:React:RedirectUris"] },
+
+                        PostLogoutRedirectUris = {configuration["IdentityServerConfig:Clients:React:PostLogoutRedirectUris"]  },
+                        AllowedCorsOrigins = { configuration["IdentityServerConfig:Clients:React:AllowedCorsOrigins"] },
 
                         AllowedScopes = new List<string>
                         {
@@ -72,6 +78,7 @@ namespace EcommerceShop.Backend.IdentityServer
 
                         // AccessTokenLifetime = 90,
                         AllowOfflineAccess = true,
+                        AllowAccessTokensViaBrowser = true
                 },
                  new Client
                 {
@@ -95,6 +102,6 @@ namespace EcommerceShop.Backend.IdentityServer
                 }
             };
         }
-           
+
     }
 }

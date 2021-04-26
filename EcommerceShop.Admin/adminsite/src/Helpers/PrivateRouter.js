@@ -1,6 +1,7 @@
 import { history } from './History';
 import { Route} from "react-router-dom";
-
+import {loadUserFromStorage, signinRedirect} from"../Services/authService";
+import React from 'react';
 
 
 export default function ProtectedRoute({
@@ -8,12 +9,13 @@ export default function ProtectedRoute({
     component: Component,
     ...rest
   }) {
-    const token = localStorage.getItem("token");
-    const info = JSON.parse(localStorage.getItem("info"));
-  
-    if(!token && !info){
-        history.push('/');
-    }
-  
-    return token && <Route {...rest} component={Component} />;
+    const [user,setUser] = React.useState(null);
+    React.useEffect(()=>{
+      loadUserFromStorage().then(data =>{
+        console.log(data)
+        if(!data)
+  signinRedirect();
+        else setUser(data)});
+    },[])
+    return user && <Route {...rest} component={Component} />;
   }

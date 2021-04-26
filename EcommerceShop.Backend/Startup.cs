@@ -41,7 +41,7 @@ namespace EcommerceShop.Backend
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAnyOrigin", builder => builder
-                    .AllowAnyOrigin()
+                    .WithOrigins(Configuration["IdentityServerConfig:Clients:React:AllowedCorsOrigins"])
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
