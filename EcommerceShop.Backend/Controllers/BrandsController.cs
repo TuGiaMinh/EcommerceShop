@@ -41,7 +41,7 @@ namespace EcommerceShop.Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<BrandUpdateRequest>> PutBrand(int id, BrandUpdateRequest brandUpdateRequest)
         {
             var brand = await _brandService.PutBrand(id, brandUpdateRequest);
@@ -53,7 +53,7 @@ namespace EcommerceShop.Backend.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles ="admin")]
         public async Task<ActionResult<BrandVm>> PostBrand(BrandCreateRequest brandCreateRequest)
         {
             var brand = await _brandService.PostBrand(brandCreateRequest);
@@ -61,7 +61,7 @@ namespace EcommerceShop.Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<BrandVm>> DeleteBrand(int id)
         {
             await _brandService.DeleteBrand(id);

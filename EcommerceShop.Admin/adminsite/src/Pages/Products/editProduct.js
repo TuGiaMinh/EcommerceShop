@@ -16,8 +16,8 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         });
         setInput({
             Name: itemEdit?.name,
-            CategoryId: itemEdit?.categoryId,
-            BrandId: itemEdit?.brandId,
+            CategoryId: itemEdit?.categoryId ?? 1,
+            BrandId: itemEdit?.brandId ?? 1,
             Price: itemEdit?.price,
             Amount: itemEdit?.amount,
             Description: itemEdit?.description,
