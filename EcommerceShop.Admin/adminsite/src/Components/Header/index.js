@@ -3,9 +3,8 @@ import { Button } from "reactstrap";
 import  {signoutRedirect,loadUserFromStorage} from "../../Services/authService";
 
 
-export default function Header(props) {
-  console.log(props.userName)
-  
+export default function Header() {
+
   const handleClick = ()=>{
     signoutRedirect();
   }
@@ -16,7 +15,7 @@ export default function Header(props) {
         <img width="40" src="./logo192.png" alt="" />
       </div>
       <div className="float-right">
-          <span className="p-5">Hello ,{props.userName ?? ""}</span> 
+          <span className="p-5">Hello Admin</span> 
         <Button color="danger" onClick={() => handleClick()}>
         Sign Out
       </Button>

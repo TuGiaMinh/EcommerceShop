@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, Col, Row } from "reactstrap";
+import { host } from "../../config";
 import brandService from "../../Services/brandService";
 import cateService from "../../Services/categoryService";
 
@@ -21,7 +22,12 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
             Price: itemEdit?.price,
             Amount: itemEdit?.amount,
             Description: itemEdit?.description,
-        })
+        });
+        var arImages= [];
+        if(itemEdit?.images){
+            arImages = itemEdit.images.map(item => host+ item.imageUrl);
+        }
+        setpreViewImages(arImages);
     }, [itemEdit]);
 
     const [listCategory, setCategory] = React.useState([]);
@@ -36,23 +42,28 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
             Price: 0,
             Amount: 0,
             Description: "",
-            
+
         });
-
+    console.log(itemEdit);
     const [files, setFiles] = React.useState([]);
-
+    const [preViewImages, setpreViewImages] = React.useState([]);
+    
     const handleChangeProduct = (e) => {
         const value = e.target.value;
         setInput({
             ...input,
             [e.target.name]: value,
         });
-        let images = []
+        let images = [];
+        let previewImages=[];
         if (e.target.files) {
 
             for (let i = 0; i < e.target.files.length; i++) {
+
+                previewImages.push(URL.createObjectURL(e.target.files[i]));
                 images.push(e.target.files[i]);
             }
+            setpreViewImages(previewImages);
             setFiles(images);
         }
     };
@@ -63,7 +74,7 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         myFormData.append("price", product?.Price);
         myFormData.append("amount", product?.Amount);
         myFormData.append("description", product?.Description);
-        myFormData.append("categoryId",product?.CategoryId);
+        myFormData.append("categoryId", product?.CategoryId);
         myFormData.append("brandId", product?.BrandId);
         if (listImage) {
             [...listImage].forEach((file) => {
@@ -72,26 +83,33 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
         }
         return myFormData;
     };
-
     const handleSubmit = () => {
 
         if (input && files) {
             onSave(ProductFormData(input, files));
             setFiles([]);
+            setpreViewImages([]);
         }
         else window.alert("Please fill the form below");
+        
     };
-    
+
     const itemsCategory = () => {
-        return listCategory?.map((item) => {
-            return <option value={item.categoryId} selected={item.categoryId === itemEdit.category?.categoryId ? true : false}>{item.name}</option>;
+        return listCategory?.map((item,index) => {
+            return <option key={index} value={item.categoryId} selected={item.categoryId === itemEdit.category?.categoryId ? true : false}>{item.name}</option>;
         });
     }
 
     const itemsBrand = () => {
-        return listBrand?.map((item) => {
-            return <option value={item.brandId} selected={item.brandId === itemEdit.brand?.brandId ? true : false}>{item.name}</option>;
+        return listBrand?.map((item,index) => {
+            return <option key={index} value={item.brandId} selected={item.brandId === itemEdit.brand?.brandId ? true : false}>{item.name}</option>;
         });
+    }
+
+    const handleCancel = ()=>{
+        onCancel();
+        setpreViewImages([]);
+        setFiles([]);
     }
 
     return (
@@ -204,18 +222,29 @@ export default function EditProduct({ itemEdit, onSave, onCancel }) {
                     <Row>
                         <Col lg={3} >
                             <FormGroup>
-                                <Button color="primary" className="float-right" onClick={handleSubmit}>
+                                <Button color="primary" className="float-right mb-3" onClick={handleSubmit}>
                                     Save
                         </Button>
                             </FormGroup>
                         </Col>
                         <Col lg={3} >
                             <FormGroup>
-                                <Button color="danger" className="float-left" onClick={() => onCancel()}>
+                                <Button color="danger" className="float-left" onClick={handleCancel}>
                                     Cancel
                                      </Button>
                             </FormGroup>
                         </Col>
+                    </Row>
+                    <Row>
+                        {preViewImages && preViewImages.map((item, index) => {
+                            return (
+                               
+                                <Col lg={3} key={++index} className="mt-5">
+                                    
+                                    <img key={++index} src={item} alt="preview" className="img-fluid" style={{width:"250px",height:"200px"}}/>
+                                </Col>
+                            )
+                        })}
                     </Row>
                 </Form>
             )}{" "}

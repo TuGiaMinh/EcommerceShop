@@ -12,7 +12,6 @@ export default function ProtectedRoute({
     const [user,setUser] = React.useState(null);
     React.useEffect(()=>{
       loadUserFromStorage().then(data =>{
-        console.log(data)
         if(!data)
   signinRedirect();
         else setUser(data)});

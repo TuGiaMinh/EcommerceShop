@@ -8,16 +8,14 @@ import React from "react";
 import  {loadUserFromStorage} from "./Services/authService";
 
 function App() {
-  const [userName,setUserName] = React.useState(null);
 
   loadUserFromStorage().then(token => {
-    setUserName(token?.profile?.name);
     localStorage.setItem("token",token?.access_token);
    });  
    return (
     <Router history={history}>
         <Switch>
-        <PageLayout header={<Header userName={userName} />} nav={<Navigate />} content={<Routes />} />
+        <PageLayout header={<Header />} nav={<Navigate />} content={<Routes />} />
       </Switch>
     </Router>
   );
