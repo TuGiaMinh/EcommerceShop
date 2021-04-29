@@ -64,3 +64,5 @@
 
 EcommerceShop.CustomerSite/wwwroot/js/** linguist-vendored
 EcommerceShop.CustomerSite/wwwroot/css/** linguist-vendored
+EcommerceShop.CustomerSite/Views/Products/** linguist-vendored
+EcommerceShop.CustomerSite/Views/Home/** linguist-vendored
