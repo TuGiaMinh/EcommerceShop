@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { signinRedirectCallback } from '../../Services/authService'
+import { loadUserFromStorage,signinRedirectCallback } from '../../Services/authService'
 import { useHistory } from 'react-router-dom'
 
 function SigninOidc() {
@@ -7,6 +7,10 @@ function SigninOidc() {
   useEffect(() => {
     async function signinAsync() {
       await signinRedirectCallback()
+       loadUserFromStorage().then(token => {
+          localStorage.setItem("token", token?.access_token);
+          localStorage.setItem("name", token?.profile?.name);
+        });
       history.push('/')
     }
     signinAsync()

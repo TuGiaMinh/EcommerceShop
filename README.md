@@ -14,7 +14,7 @@
 
 Build an ecommerce web site with minimum functionality below:
 
-## For customers:
+## [For customers:](http://customersitee98ec18c562f4fcd98c85e1f2874d179.azurewebsites.net/)
 
 ```
 
@@ -31,7 +31,7 @@ Build an ecommerce web site with minimum functionality below:
 
 ```
 
-## For admin:
+## [For admin:](https://sa6fb6fae349994313887b2c.z23.web.core.windows.net/)
 
 ```
 
